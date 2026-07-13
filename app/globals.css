@@ -86,3 +86,9 @@ a { color:inherit; text-decoration:none; }
 @media (max-width:800px){.blacksite-hero .project-hero-copy h1{white-space:normal}.blacksite-hero .project-hero-copy p{width:auto;max-width:480px;font-size:19px}.blacksite-page .eyebrow{font-size:16px}.blacksite-overview h2{font-size:clamp(48px,13vw,72px)}.blacksite-overview dt{font-size:12px}.blacksite-overview dd{font-size:18px}.blacksite-section>p{font-size:23px;line-height:1.65}.blacksite-goals h3,.postmortem-grid h3{font-size:31px}.blacksite-goals p,.postmortem-grid ul{font-size:20px;line-height:1.65}}
  .blacksite-mobile-break{display:none}
 @media (max-width:800px){.blacksite-mobile-break{display:block}}
+@media (min-width:801px){
+  .site-header{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);justify-content:initial;column-gap:24px}
+  .main-nav{min-width:0;gap:clamp(12px,2vw,28px);font-size:clamp(11px,1vw,13px)}
+  .brand{position:static;left:auto;transform:none;justify-self:center;font-size:clamp(20px,2.4vw,30px)}
+  .header-socials{position:static;right:auto;justify-self:end}
+}
