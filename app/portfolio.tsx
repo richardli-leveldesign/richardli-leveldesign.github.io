@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { MobileHeader } from "./mobile-header";
 
 export const projects = [
   {
@@ -68,9 +69,10 @@ export const projects = [
 export function SiteShell({ children, activePath = "/" }: { children: ReactNode; activePath?: string }) {
   const active = (path: string) => activePath === path ? "active" : "";
   const projectsActive = activePath === "/projects" ? "active" : "";
+  const mobileProjects = projects.filter((project) => !project.underConstruction).map(({ slug, title, number }) => ({ slug, title, number }));
   return (
     <div className="site-shell">
-      <header className="site-header">
+      <header className="site-header desktop-header">
         <nav className="main-nav" aria-label="Primary navigation">
           <Link className={active("/")} href="/">Home</Link>
           <div className="project-nav">
@@ -93,6 +95,7 @@ export function SiteShell({ children, activePath = "/" }: { children: ReactNode;
           <a href="https://www.linkedin.com/in/ruichi-li-9903372b1/" target="_blank" rel="noreferrer" aria-label="Ruichi Li on LinkedIn">in</a>
         </div>
       </header>
+      <MobileHeader activePath={activePath} projects={mobileProjects} />
       <main>{children}</main>
       <footer className="site-footer">
         <div className="footer-links"><Link href="/">Home Page</Link><Link href="/contact">Contact</Link><Link href="/about">About Me</Link></div>
