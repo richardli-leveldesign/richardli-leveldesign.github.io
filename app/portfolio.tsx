@@ -76,7 +76,7 @@ export function SiteShell({ children, activePath = "/" }: { children: ReactNode;
           <div className="project-nav">
             <span className={`project-trigger ${projectsActive}`}>Projects <span>+</span></span>
             <div className="project-menu">
-              {projects.map((project) => (
+              {projects.filter((project) => !project.underConstruction).map((project) => (
                 <Link key={project.slug} href={`/projects/${project.slug}`}>
                   <small>{project.number}</small>{project.title}
                 </Link>

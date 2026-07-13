@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { ProjectPage, projects } from "../../portfolio";
 
 export function generateStaticParams() {
-  return projects.map((project) => ({ slug: project.slug }));
+  return projects.filter((project) => !project.underConstruction).map((project) => ({ slug: project.slug }));
 }
 
 export default async function Project({ params }: { params: Promise<{ slug: string }> }) {
