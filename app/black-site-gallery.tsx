@@ -33,8 +33,7 @@ export function BlackSiteGallery() {
   const next = () => setCurrent((index) => (index + 1) % galleryImages.length);
 
   useEffect(() => {
-    const isPlayingVideo = galleryImages[current].type === "video" && videoPlaying;
-    if (isPlayingVideo) return;
+    if (galleryImages[current].type === "video") return;
 
     const timer = window.setTimeout(() => {
       setCurrent((index) => (index + 1) % galleryImages.length);
