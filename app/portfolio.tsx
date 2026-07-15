@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { MobileHeader } from "./mobile-header";
-import { BlackSiteGallery } from "./black-site-gallery";
+import { BlackSiteGallery, KillTheMakersGallery } from "./black-site-gallery";
 
 export const projects = [
   {
@@ -141,7 +141,7 @@ export function ProjectPage({ project }: { project: (typeof projects)[number] })
     <section className="blacksite-section blacksite-empty"><span className="eyebrow">DESIGN GOALS</span></section>
     <section className="blacksite-section blacksite-empty"><span className="eyebrow">GAMEPLAY DESCRIPTION</span></section>
     <section className="blacksite-section blacksite-empty"><span className="eyebrow">POSTMORTEM</span></section>
-    <section className="blacksite-section blacksite-empty"><span className="eyebrow">GALLERY</span></section>
+    <section className="blacksite-section blacksite-gallery-section"><span className="eyebrow">GALLERY</span>{project.slug === "killthemakers" ? <KillTheMakersGallery /> : null}</section>
   </div></SiteShell>;
 }
 

@@ -9,7 +9,14 @@ declare global {
   }
 }
 
-const galleryImages = [
+type GalleryItem = {
+  type: "video" | "image";
+  src: string;
+  thumbnail: string;
+  alt: string;
+};
+
+const blackSiteGalleryItems: GalleryItem[] = [
   {
     type: "video" as const,
     src: "https://www.youtube.com/embed/7fnmoxMbTj8?enablejsapi=1&origin=https%3A%2F%2Frichardli-leveldesign.github.io&rel=0&vq=hd720",
@@ -24,7 +31,26 @@ const galleryImages = [
   })),
 ];
 
-export function BlackSiteGallery() {
+const killTheMakersGalleryItems: GalleryItem[] = [
+  "HolcombW_TGP1_KilltheMakers_Screenshot_010.jpg",
+  "HolcombW_TGP1_KilltheMakers_Screenshot_08.jpg",
+  "HolcombW_TGP1_KilltheMakers_Screenshot_09.jpg",
+  "RLi_TGP1_KilltheMakers_Screenshot_03.jpg",
+  "RLi_TGP1_KilltheMakers_Screenshot_04.jpg",
+  "RLi_TGP1_KilltheMakers_Screenshot_05.jpg",
+  "RLi_TGP1_KilltheMakers_Screenshot_06.jpg",
+  "RLi_TGP1_KilltheMakers_Screenshot_07.jpg",
+  "RLi_TGP1_KilltheMakers_Screenshot_08.jpg",
+  "RLi_TGP1_KilltheMakers_Screenshot_09.jpg",
+].map((name, index) => ({
+  type: "image" as const,
+  src: `/kill-the-makers-gallery/${name}`,
+  thumbnail: `/kill-the-makers-gallery/${name}`,
+  alt: `Kill the Makers gallery image ${index + 1}`,
+}));
+
+export function BlackSiteGallery({ items = blackSiteGalleryItems }: { items?: GalleryItem[] }) {
+  const galleryImages = items;
   const [current, setCurrent] = useState(0);
   const [videoPlaying, setVideoPlaying] = useState(false);
   const playerRef = useRef<any>(null);
@@ -117,4 +143,8 @@ export function BlackSiteGallery() {
       </div>
     </div>
   );
+}
+
+export function KillTheMakersGallery() {
+  return <BlackSiteGallery items={killTheMakersGalleryItems} />;
 }
