@@ -141,7 +141,7 @@ export function ProjectPage({ project }: { project: (typeof projects)[number] })
     <section className="blacksite-section blacksite-empty"><span className="eyebrow">DESIGN GOALS</span></section>
     <section className="blacksite-section blacksite-empty"><span className="eyebrow">GAMEPLAY DESCRIPTION</span></section>
     <section className="blacksite-section blacksite-empty"><span className="eyebrow">POSTMORTEM</span></section>
-    <section className="blacksite-section blacksite-gallery-section"><span className="eyebrow">GALLERY</span>{project.slug === "killthemakers" ? <KillTheMakersGallery /> : null}</section>
+    <section className="blacksite-section blacksite-gallery-section"><span className="eyebrow">GALLERY</span>{project.slug === "kill-the-makers" ? <KillTheMakersGallery /> : null}</section>
   </div></SiteShell>;
 }
 
