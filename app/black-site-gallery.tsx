@@ -54,6 +54,7 @@ export function BlackSiteGallery({ items = blackSiteGalleryItems }: { items?: Ga
   const [current, setCurrent] = useState(0);
   const [videoPlaying, setVideoPlaying] = useState(false);
   const playerRef = useRef<any>(null);
+  const thumbnailListRef = useRef<HTMLDivElement | null>(null);
   const thumbnailRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
   const previous = () => setCurrent((index) => (index - 1 + galleryImages.length) % galleryImages.length);
@@ -69,7 +70,11 @@ export function BlackSiteGallery({ items = blackSiteGalleryItems }: { items?: Ga
   }, [current, videoPlaying]);
 
   useEffect(() => {
-    thumbnailRefs.current[current]?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    const list = thumbnailListRef.current;
+    const thumbnail = thumbnailRefs.current[current];
+    if (!list || !thumbnail) return;
+    const targetLeft = thumbnail.offsetLeft - (list.clientWidth - thumbnail.offsetWidth) / 2;
+    list.scrollTo({ left: Math.max(0, targetLeft), behavior: "smooth" });
   }, [current]);
 
   useEffect(() => {
@@ -128,7 +133,7 @@ export function BlackSiteGallery({ items = blackSiteGalleryItems }: { items?: Ga
         <button className="gallery-arrow gallery-arrow-left" type="button" onClick={previous} aria-label="Previous gallery image">←</button>
         <button className="gallery-arrow gallery-arrow-right" type="button" onClick={next} aria-label="Next gallery image">→</button>
       </div>
-      <div className="blacksite-gallery-thumbnails" aria-label="Choose a gallery image">
+      <div ref={thumbnailListRef} className="blacksite-gallery-thumbnails" aria-label="Choose a gallery image">
         {galleryImages.map((image, index) => (
           <button
             key={image.src}
