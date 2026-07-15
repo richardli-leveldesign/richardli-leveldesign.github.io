@@ -54,6 +54,7 @@ export function BlackSiteGallery({ items = blackSiteGalleryItems }: { items?: Ga
   const [current, setCurrent] = useState(0);
   const [videoPlaying, setVideoPlaying] = useState(false);
   const playerRef = useRef<any>(null);
+  const thumbnailRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
   const previous = () => setCurrent((index) => (index - 1 + galleryImages.length) % galleryImages.length);
   const next = () => setCurrent((index) => (index + 1) % galleryImages.length);
@@ -66,6 +67,10 @@ export function BlackSiteGallery({ items = blackSiteGalleryItems }: { items?: Ga
     }, 5000);
     return () => window.clearTimeout(timer);
   }, [current, videoPlaying]);
+
+  useEffect(() => {
+    thumbnailRefs.current[current]?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+  }, [current]);
 
   useEffect(() => {
     setVideoPlaying(false);
@@ -127,6 +132,7 @@ export function BlackSiteGallery({ items = blackSiteGalleryItems }: { items?: Ga
         {galleryImages.map((image, index) => (
           <button
             key={image.src}
+            ref={(element) => { thumbnailRefs.current[index] = element; }}
             className={`gallery-thumbnail${index === current ? " is-active" : ""}`}
             type="button"
             onClick={() => setCurrent(index)}
