@@ -54,8 +54,6 @@ export function BlackSiteGallery({ items = blackSiteGalleryItems }: { items?: Ga
   const [current, setCurrent] = useState(0);
   const [videoPlaying, setVideoPlaying] = useState(false);
   const playerRef = useRef<any>(null);
-  const thumbnailListRef = useRef<HTMLDivElement | null>(null);
-  const thumbnailRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
   const previous = () => setCurrent((index) => (index - 1 + galleryImages.length) % galleryImages.length);
   const next = () => setCurrent((index) => (index + 1) % galleryImages.length);
@@ -74,18 +72,6 @@ export function BlackSiteGallery({ items = blackSiteGalleryItems }: { items?: Ga
     }, 5000);
     return () => window.clearTimeout(timer);
   }, [current, videoPlaying]);
-
-  useEffect(() => {
-    const list = thumbnailListRef.current;
-    const thumbnail = thumbnailRefs.current[current];
-    if (!list || !thumbnail) return;
-
-    const centerTarget = thumbnail.offsetLeft - (list.clientWidth - thumbnail.offsetWidth) / 2;
-    const maxScrollLeft = Math.max(0, list.scrollWidth - list.clientWidth);
-    const targetLeft = Math.min(maxScrollLeft, Math.max(0, centerTarget));
-
-    list.scrollTo({ left: targetLeft, behavior: "smooth" });
-  }, [current]);
 
   useEffect(() => {
     setVideoPlaying(false);
@@ -143,11 +129,10 @@ export function BlackSiteGallery({ items = blackSiteGalleryItems }: { items?: Ga
         <button className="gallery-arrow gallery-arrow-left" type="button" onClick={previous} aria-label="Previous gallery image">←</button>
         <button className="gallery-arrow gallery-arrow-right" type="button" onClick={next} aria-label="Next gallery image">→</button>
       </div>
-      <div ref={thumbnailListRef} className="blacksite-gallery-thumbnails" aria-label="Choose a gallery image">
+      <div className="blacksite-gallery-thumbnails" aria-label="Choose a gallery image">
         {galleryImages.map((image, index) => (
           <button
             key={image.src}
-            ref={(element) => { thumbnailRefs.current[index] = element; }}
             className={`gallery-thumbnail${index === current ? " is-active" : ""}`}
             type="button"
             onClick={() => setCurrent(index)}
