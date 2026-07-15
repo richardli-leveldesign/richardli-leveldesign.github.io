@@ -14,9 +14,9 @@ export function BlackSiteGallery() {
   const next = () => setCurrent((index) => (index + 1) % galleryImages.length);
 
   useEffect(() => {
-    const timer = window.setInterval(next, 5000);
-    return () => window.clearInterval(timer);
-  }, []);
+    const timer = window.setTimeout(next, 5000);
+    return () => window.clearTimeout(timer);
+  }, [current]);
 
   return (
     <div className="blacksite-gallery" aria-label="Black Site gallery">
