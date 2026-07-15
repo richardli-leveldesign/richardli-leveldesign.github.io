@@ -79,8 +79,12 @@ export function BlackSiteGallery({ items = blackSiteGalleryItems }: { items?: Ga
     const list = thumbnailListRef.current;
     const thumbnail = thumbnailRefs.current[current];
     if (!list || !thumbnail) return;
-    const targetLeft = thumbnail.offsetLeft - (list.clientWidth - thumbnail.offsetWidth) / 2;
-    list.scrollTo({ left: Math.max(0, targetLeft), behavior: "smooth" });
+
+    const centerTarget = thumbnail.offsetLeft - (list.clientWidth - thumbnail.offsetWidth) / 2;
+    const maxScrollLeft = Math.max(0, list.scrollWidth - list.clientWidth);
+    const targetLeft = Math.min(maxScrollLeft, Math.max(0, centerTarget));
+
+    list.scrollTo({ left: targetLeft, behavior: "smooth" });
   }, [current]);
 
   useEffect(() => {
