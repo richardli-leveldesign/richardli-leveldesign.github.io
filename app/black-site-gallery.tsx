@@ -12,8 +12,8 @@ declare global {
 const galleryImages = [
   {
     type: "video" as const,
-    src: "https://www.youtube.com/embed/fGnqZISRlvQ?enablejsapi=1&origin=https%3A%2F%2Frichardli-leveldesign.github.io&rel=0&vq=hd720",
-    thumbnail: "https://img.youtube.com/vi/fGnqZISRlvQ/hqdefault.jpg",
+    src: "https://www.youtube.com/embed/7fnmoxMbTj8?enablejsapi=1&origin=https%3A%2F%2Frichardli-leveldesign.github.io&rel=0&vq=hd720",
+    thumbnail: "https://img.youtube.com/vi/7fnmoxMbTj8/hqdefault.jpg",
     alt: "Black Site video",
   },
   ...Array.from({ length: 19 }, (_, index) => ({
