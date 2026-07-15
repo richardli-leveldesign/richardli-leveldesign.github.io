@@ -2,10 +2,20 @@
 
 import { useEffect, useState } from "react";
 
-const galleryImages = Array.from({ length: 19 }, (_, index) => ({
-  src: `/black-site-gallery/Screenshot%20${index + 1}.jpg`,
-  alt: `Black Site gallery image ${index + 1}`,
-}));
+const galleryImages = [
+  {
+    type: "video" as const,
+    src: "https://www.youtube.com/embed/fGnqZISRlvQ?rel=0",
+    thumbnail: "https://img.youtube.com/vi/fGnqZISRlvQ/hqdefault.jpg",
+    alt: "Black Site video",
+  },
+  ...Array.from({ length: 19 }, (_, index) => ({
+    type: "image" as const,
+    src: `/black-site-gallery/Screenshot%20${index + 1}.jpg`,
+    thumbnail: `/black-site-gallery/Screenshot%20${index + 1}.jpg`,
+    alt: `Black Site gallery image ${index + 1}`,
+  })),
+];
 
 export function BlackSiteGallery() {
   const [current, setCurrent] = useState(0);
@@ -21,7 +31,11 @@ export function BlackSiteGallery() {
   return (
     <div className="blacksite-gallery" aria-label="Black Site gallery">
       <div className="blacksite-gallery-frame" aria-live="polite">
-        <img src={galleryImages[current].src} alt={galleryImages[current].alt} />
+        {galleryImages[current].type === "video" ? (
+          <iframe className="blacksite-gallery-video" src={galleryImages[current].src} title="Black Site video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
+        ) : (
+          <img src={galleryImages[current].src} alt={galleryImages[current].alt} />
+        )}
         <button className="gallery-arrow gallery-arrow-left" type="button" onClick={previous} aria-label="Previous gallery image">←</button>
         <button className="gallery-arrow gallery-arrow-right" type="button" onClick={next} aria-label="Next gallery image">→</button>
       </div>
@@ -35,7 +49,7 @@ export function BlackSiteGallery() {
             aria-label={`Show gallery image ${index + 1}`}
             aria-current={index === current ? "true" : undefined}
           >
-            <img src={image.src} alt="" />
+            <img src={image.thumbnail} alt="" />
           </button>
         ))}
       </div>
