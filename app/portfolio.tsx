@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { MobileHeader } from "./mobile-header";
+import { BlackSiteGallery } from "./black-site-gallery";
 
 export const projects = [
   {
@@ -144,7 +145,7 @@ function BlackSitePage({ project }: { project: (typeof projects)[number] }) {
     <section className="blacksite-section"><span className="eyebrow">DESIGN GOALS</span><div className="blacksite-goals"><article><span>01</span><h3>Combat Design</h3><p>Create balanced combat encounters through cover placement, enemy composition, and resource distribution. Combat intensity increases gradually while giving players multiple strategic options.</p></article><article><span>02</span><h3>Puzzle Progression</h3><p>Introduce the battery and one-way fence mechanics through clear, step-by-step teaching, then reinforce learning through repetition, variation, and combination.</p></article><article><span>03</span><h3>Narrative &amp; Environment</h3><p>Guide the player through an escape narrative while using level progression to create direction and accomplishment. The visual style transitions from the industrial Citadel to City 17.</p></article></div></section>
     <section className="blacksite-section blacksite-empty"><span className="eyebrow">GAMEPLAY DESCRIPTION</span></section>
     <section className="blacksite-section blacksite-postmortem"><span className="eyebrow">POSTMORTEM</span><div className="postmortem-grid"><article><h3>What went well</h3><ul><li>Milestones were completed on time and maintained a high level of quality.</li><li>Feedback from C34 students led to useful iterations and improvements.</li><li>The cover-based combat was fun, readable, and balanced.</li></ul></article><article><h3>What went wrong</h3><ul><li>The 3D skybox was locked in an early phase and became difficult to revise.</li><li>Alyx occasionally lost track of the player and stopped moving.</li></ul></article><article><h3>What I would improve</h3><ul><li>Build a more robust companion-following system.</li><li>Improve the battery slot before the prison gate.</li><li>Rebuild the 3D skybox with stronger visual composition.</li><li>Fix minor potential soft-lock situations.</li></ul></article></div></section>
-    <section className="blacksite-section blacksite-empty"><span className="eyebrow">GALLERY</span></section>
+    <section className="blacksite-section blacksite-gallery-section"><span className="eyebrow">GALLERY</span><BlackSiteGallery /></section>
   </div></SiteShell>;
 }
 
