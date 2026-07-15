@@ -100,6 +100,7 @@ a { color:inherit; text-decoration:none; }
 }
 
 .blacksite-gallery{margin-top:34px}
+.generic-about-placeholder .blacksite-empty{min-height:220px}
 .blacksite-overview{grid-template-columns:1.25fr 1fr;gap:64px}.blacksite-about-media{min-width:0}.blacksite-about-video{display:block;width:100%;margin-top:0;aspect-ratio:16/9;object-fit:cover;background:#070a0b;border:1px solid var(--line)}
 .blacksite-gallery-frame{position:relative;display:grid;place-items:center;aspect-ratio:16/9;background:#11191b;overflow:hidden}
 .blacksite-gallery-frame img{display:block;width:100%;height:100%;object-fit:cover;background:#070a0b}

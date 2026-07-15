@@ -135,7 +135,14 @@ export function ProjectsPage() {
 
 export function ProjectPage({ project }: { project: (typeof projects)[number] }) {
   if (project.slug === "blacksite") return <BlackSitePage project={project} />;
-  return <SiteShell activePath="/projects"><section className="project-hero"><img src={project.image} alt="" /><div className="project-hero-shade" /><div className="project-hero-copy"><span className="eyebrow">{project.number} / {project.engine}</span><h1>{project.title}</h1><p>{project.description}</p></div></section><section className="case-study"><aside><span className="eyebrow">ROLE</span><strong>{project.role}</strong><span className="eyebrow">FOCUS</span><strong>{project.subtitle}</strong></aside><div><span className="eyebrow">DESIGN INTENT</span><h2>Making every decision legible, expressive, and satisfying to play.</h2><p>This case study presents the level-design thinking behind the project: creating clear player goals, using spatial composition to support momentum, and iterating from playtest feedback.</p><div className="case-rule" /><p>From the first route sketch to the final encounter pass, the aim is the same: make the next meaningful decision feel visible, but never forced.</p></div></section></SiteShell>;
+  return <SiteShell activePath="/projects"><section className="project-hero blacksite-hero"><img src={project.image} alt={`${project.title} project cover`} /><div className="project-hero-shade" /><div className="project-hero-copy"><span className="eyebrow">{project.number} / {project.engine}</span><h1>{project.title}</h1></div></section><div className="blacksite-page generic-project-page">
+    <section className="blacksite-overview"><div className="generic-about-placeholder"><span className="eyebrow">ABOUT</span><div className="blacksite-empty" /></div><dl><div><dt>POSITIONS</dt><dd /></div><div><dt>ENGINE</dt><dd /></div><div><dt>PLATFORM</dt><dd /></div><div><dt>DEVELOPMENT</dt><dd /></div></dl></section>
+    <section className="blacksite-section blacksite-empty"><span className="eyebrow">DESCRIPTION</span></section>
+    <section className="blacksite-section blacksite-empty"><span className="eyebrow">DESIGN GOALS</span></section>
+    <section className="blacksite-section blacksite-empty"><span className="eyebrow">GAMEPLAY DESCRIPTION</span></section>
+    <section className="blacksite-section blacksite-empty"><span className="eyebrow">POSTMORTEM</span></section>
+    <section className="blacksite-section blacksite-empty"><span className="eyebrow">GALLERY</span></section>
+  </div></SiteShell>;
 }
 
 function BlackSitePage({ project }: { project: (typeof projects)[number] }) {
