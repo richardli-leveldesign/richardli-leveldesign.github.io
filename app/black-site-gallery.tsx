@@ -33,8 +33,12 @@ export function BlackSiteGallery() {
   const next = () => setCurrent((index) => (index + 1) % galleryImages.length);
 
   useEffect(() => {
-    if (galleryImages[current].type !== "video" || videoPlaying) return;
-    const timer = window.setTimeout(next, 5000);
+    const isPlayingVideo = galleryImages[current].type === "video" && videoPlaying;
+    if (isPlayingVideo) return;
+
+    const timer = window.setTimeout(() => {
+      setCurrent((index) => (index + 1) % galleryImages.length);
+    }, 5000);
     return () => window.clearTimeout(timer);
   }, [current, videoPlaying]);
 
