@@ -32,9 +32,6 @@ const blackSiteGalleryItems: GalleryItem[] = [
 ];
 
 const killTheMakersGalleryItems: GalleryItem[] = [
-  "HolcombW_TGP1_KilltheMakers_Screenshot_010.jpg",
-  "HolcombW_TGP1_KilltheMakers_Screenshot_08.jpg",
-  "HolcombW_TGP1_KilltheMakers_Screenshot_09.jpg",
   "RLi_TGP1_KilltheMakers_Screenshot_03.jpg",
   "RLi_TGP1_KilltheMakers_Screenshot_04.jpg",
   "RLi_TGP1_KilltheMakers_Screenshot_05.jpg",
@@ -42,6 +39,9 @@ const killTheMakersGalleryItems: GalleryItem[] = [
   "RLi_TGP1_KilltheMakers_Screenshot_07.jpg",
   "RLi_TGP1_KilltheMakers_Screenshot_08.jpg",
   "RLi_TGP1_KilltheMakers_Screenshot_09.jpg",
+  "HolcombW_TGP1_KilltheMakers_Screenshot_010.jpg",
+  "HolcombW_TGP1_KilltheMakers_Screenshot_08.jpg",
+  "HolcombW_TGP1_KilltheMakers_Screenshot_09.jpg",
 ].map((name, index) => ({
   type: "image" as const,
   src: `/kill-the-makers-gallery/${name}`,
