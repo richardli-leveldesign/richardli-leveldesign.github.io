@@ -12,7 +12,7 @@ declare global {
 const galleryImages = [
   {
     type: "video" as const,
-    src: "https://www.youtube.com/embed/fGnqZISRlvQ?enablejsapi=1&origin=https%3A%2F%2Frichardli-leveldesign.github.io&rel=0",
+    src: "https://www.youtube.com/embed/fGnqZISRlvQ?enablejsapi=1&origin=https%3A%2F%2Frichardli-leveldesign.github.io&rel=0&vq=hd720",
     thumbnail: "https://img.youtube.com/vi/fGnqZISRlvQ/hqdefault.jpg",
     alt: "Black Site video",
   },
@@ -52,6 +52,7 @@ export function BlackSiteGallery() {
       if (!window.YT?.Player) return;
       playerRef.current = new window.YT.Player("blacksite-youtube-player", {
         events: {
+          onReady: (event: any) => event.target.setPlaybackQuality?.("hd720"),
           onStateChange: (event: any) => {
             if (event.data === 1) setVideoPlaying(true);
             if (event.data === 2) setVideoPlaying(false);
