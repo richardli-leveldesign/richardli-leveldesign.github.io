@@ -31,7 +31,7 @@ const blackSiteGalleryItems: GalleryItem[] = [
   })),
 ];
 
-const killTheMakersGalleryItems: GalleryItem[] = [
+const killTheMakersGalleryImageNames = [
   "RLi_TGP1_KilltheMakers_Screenshot_03.jpg",
   "RLi_TGP1_KilltheMakers_Screenshot_04.jpg",
   "RLi_TGP1_KilltheMakers_Screenshot_05.jpg",
@@ -42,12 +42,22 @@ const killTheMakersGalleryItems: GalleryItem[] = [
   "HolcombW_TGP1_KilltheMakers_Screenshot_010.jpg",
   "HolcombW_TGP1_KilltheMakers_Screenshot_08.jpg",
   "HolcombW_TGP1_KilltheMakers_Screenshot_09.jpg",
-].map((name, index) => ({
+];
+
+const killTheMakersGalleryItems: GalleryItem[] = [
+  {
+    type: "video" as const,
+    src: "/kill-the-makers-walkthrough.mp4",
+    thumbnail: "/kill-the-makers-header-capsule.png",
+    alt: "Kill the Makers walkthrough video",
+  },
+  ...killTheMakersGalleryImageNames.map((name, index) => ({
   type: "image" as const,
   src: `/kill-the-makers-gallery/${name}`,
   thumbnail: `/kill-the-makers-gallery/${name}`,
   alt: `Kill the Makers gallery image ${index + 1}`,
-}));
+  })),
+];
 
 export function BlackSiteGallery({ items = blackSiteGalleryItems }: { items?: GalleryItem[] }) {
   const galleryImages = items;
@@ -78,7 +88,7 @@ export function BlackSiteGallery({ items = blackSiteGalleryItems }: { items?: Ga
     playerRef.current?.destroy?.();
     playerRef.current = null;
 
-    if (galleryImages[current].type !== "video") return;
+    if (galleryImages[current].type !== "video" || galleryImages[current].src.startsWith("/")) return;
 
     const createPlayer = () => {
       if (!window.YT?.Player) return;
@@ -122,7 +132,14 @@ export function BlackSiteGallery({ items = blackSiteGalleryItems }: { items?: Ga
     <div className="blacksite-gallery" aria-label="Black Site gallery">
       <div className="blacksite-gallery-frame" aria-live="polite">
         {galleryImages[current].type === "video" ? (
-          <iframe id="blacksite-youtube-player" className="blacksite-gallery-video" src={galleryImages[current].src} title="Black Site video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
+          galleryImages[current].src.startsWith("/") ? (
+            <video className="blacksite-gallery-video" controls playsInline preload="metadata" onEnded={next}>
+              <source src={galleryImages[current].src} type="video/mp4" />
+              Your browser does not support the video player.
+            </video>
+          ) : (
+            <iframe id="blacksite-youtube-player" className="blacksite-gallery-video" src={galleryImages[current].src} title="Black Site video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
+          )
         ) : (
           <img src={galleryImages[current].src} alt={galleryImages[current].alt} />
         )}
