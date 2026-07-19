@@ -4,8 +4,9 @@ import Link from "next/link";
 import { useState } from "react";
 
 type ProjectLink = { slug: string; title: string; number: string };
+type ProjectGroup = { label: string; projects: ProjectLink[] };
 
-export function MobileHeader({ activePath, projects }: { activePath: string; projects: ProjectLink[] }) {
+export function MobileHeader({ activePath, projectGroups }: { activePath: string; projectGroups: ProjectGroup[] }) {
   const [open, setOpen] = useState(false);
   const [projectsOpen, setProjectsOpen] = useState(false);
   const active = (path: string) => activePath === path ? "active" : "";
@@ -24,7 +25,7 @@ export function MobileHeader({ activePath, projects }: { activePath: string; pro
         <Link className={active("/")} href="/" onClick={close}>Home</Link>
         <div className="mobile-projects">
           <button className={`mobile-project-trigger ${projectActive}`} type="button" onClick={() => setProjectsOpen((value) => !value)} aria-expanded={projectsOpen}>Projects <span>+</span></button>
-          {projectsOpen && <div className="mobile-project-menu">{projects.map((project) => <Link key={project.slug} href={`/projects/${project.slug}`} onClick={close}><small>{project.number}</small>{project.title}</Link>)}</div>}
+          {projectsOpen && <div className="mobile-project-menu">{projectGroups.map((group) => <div className="mobile-project-group" key={group.label}><p>{group.label}</p>{group.projects.map((project) => <Link key={project.slug} href={`/projects/${project.slug}`} onClick={close}><small>{project.number}</small>{project.title}</Link>)}</div>)}</div>}
         </div>
         <Link className={active("/about")} href="/about" onClick={close}>About</Link>
         <Link className={active("/resume")} href="/resume" onClick={close}>Resume</Link>

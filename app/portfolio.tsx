@@ -70,7 +70,11 @@ export const projects = [
 export function SiteShell({ children, activePath = "/" }: { children: ReactNode; activePath?: string }) {
   const active = (path: string) => activePath === path ? "active" : "";
   const projectsActive = activePath === "/projects" ? "active" : "";
-  const mobileProjects = projects.filter((project) => !project.underConstruction).map(({ slug, title, number }) => ({ slug, title, number }));
+  const visibleProjects = projects.filter((project) => !project.underConstruction).map(({ slug, title, number }) => ({ slug, title, number }));
+  const projectGroups = [
+    { label: "Team Projects", projects: visibleProjects.filter((project) => project.slug === "kill-the-makers" || project.slug === "hamsterballin") },
+    { label: "Individual Projects", projects: visibleProjects.filter((project) => project.slug === "firefly" || project.slug === "blacksite") },
+  ];
   return (
     <div className="site-shell">
       <header className="site-header desktop-header">
@@ -79,11 +83,7 @@ export function SiteShell({ children, activePath = "/" }: { children: ReactNode;
           <div className="project-nav">
             <span className={`project-trigger ${projectsActive}`}>Projects <span>+</span></span>
             <div className="project-menu">
-              {projects.filter((project) => !project.underConstruction).map((project) => (
-                <Link key={project.slug} href={`/projects/${project.slug}`}>
-                  <small>{project.number}</small>{project.title}
-                </Link>
-              ))}
+              {projectGroups.map((group) => <div className="project-menu-group" key={group.label}><p>{group.label}</p>{group.projects.map((project) => <Link key={project.slug} href={`/projects/${project.slug}`}><small>{project.number}</small>{project.title}</Link>)}</div>)}
             </div>
           </div>
           <Link className={active("/about")} href="/about">About</Link>
@@ -96,7 +96,7 @@ export function SiteShell({ children, activePath = "/" }: { children: ReactNode;
           <a href="https://www.linkedin.com/in/ruichi-li-9903372b1/" target="_blank" rel="noreferrer" aria-label="Ruichi Li on LinkedIn">in</a>
         </div>
       </header>
-      <MobileHeader activePath={activePath} projects={mobileProjects} />
+      <MobileHeader activePath={activePath} projectGroups={projectGroups} />
       <main>{children}</main>
       <footer className="site-footer">
         <div className="footer-links"><Link href="/">Home Page</Link><Link href="/contact">Contact</Link><Link href="/about">About Me</Link></div>
