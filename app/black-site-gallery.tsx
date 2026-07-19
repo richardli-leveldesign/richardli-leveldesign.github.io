@@ -81,12 +81,20 @@ const hamsterballinGalleryImageNames = [
   "Hamsterballin Wavey Road.jpg",
 ];
 
-const hamsterballinGalleryItems: GalleryItem[] = hamsterballinGalleryImageNames.map((name, index) => ({
-  type: "image" as const,
-  src: `/hamsterballin-gallery/${encodeURIComponent(name)}`,
-  thumbnail: `/hamsterballin-gallery/${encodeURIComponent(name)}`,
-  alt: `Hamsterballin' gallery image ${index + 1}: ${name.replace(/^Hamsterballin\s*/, "").replace(/\.jpg$/, "")}`,
-}));
+const hamsterballinGalleryItems: GalleryItem[] = [
+  {
+    type: "video" as const,
+    src: "https://www.youtube.com/embed/gUAml3nPHnU?enablejsapi=1&origin=https%3A%2F%2Frichardli-leveldesign.github.io&rel=0&vq=hd720",
+    thumbnail: "https://img.youtube.com/vi/gUAml3nPHnU/hqdefault.jpg",
+    alt: "Hamsterballin' gameplay video",
+  },
+  ...hamsterballinGalleryImageNames.map((name, index) => ({
+    type: "image" as const,
+    src: `/hamsterballin-gallery/${encodeURIComponent(name)}`,
+    thumbnail: `/hamsterballin-gallery/${encodeURIComponent(name)}`,
+    alt: `Hamsterballin' gallery image ${index + 1}: ${name.replace(/^Hamsterballin\s*/, "").replace(/\.jpg$/, "")}`,
+  })),
+];
 
 export function BlackSiteGallery({ items = blackSiteGalleryItems }: { items?: GalleryItem[] }) {
   const galleryImages = items;
