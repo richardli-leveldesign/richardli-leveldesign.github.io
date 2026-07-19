@@ -69,23 +69,21 @@ export const projects = [
 
 export function SiteShell({ children, activePath = "/" }: { children: ReactNode; activePath?: string }) {
   const active = (path: string) => activePath === path ? "active" : "";
-  const projectsActive = activePath === "/projects" ? "active" : "";
   const visibleProjects = projects.filter((project) => !project.underConstruction).map(({ slug, title, number }) => ({ slug, title, number }));
   const projectGroups = [
     { label: "Team Projects", projects: visibleProjects.filter((project) => project.slug === "kill-the-makers" || project.slug === "hamsterballin") },
     { label: "Individual Projects", projects: visibleProjects.filter((project) => project.slug === "firefly" || project.slug === "blacksite") },
   ];
+  const groupActive = (group: (typeof projectGroups)[number]) => group.projects.some((project) => activePath === `/projects/${project.slug}`) ? "active" : "";
   return (
     <div className="site-shell">
       <header className="site-header desktop-header">
         <nav className="main-nav" aria-label="Primary navigation">
           <Link className={active("/")} href="/">Home</Link>
-          <div className="project-nav">
-            <span className={`project-trigger ${projectsActive}`}>Projects <span>+</span></span>
-            <div className="project-menu">
-              {projectGroups.map((group) => <div className="project-menu-group" key={group.label}><p>{group.label}</p>{group.projects.map((project) => <Link key={project.slug} href={`/projects/${project.slug}`}><small>{project.number}</small>{project.title}</Link>)}</div>)}
-            </div>
-          </div>
+          {projectGroups.map((group) => <div className="project-nav" key={group.label}>
+            <span className={`project-trigger ${groupActive(group)}`}>{group.label}</span>
+            <div className="project-menu">{group.projects.map((project) => <Link key={project.slug} href={`/projects/${project.slug}`}><small>{project.number}</small>{project.title}</Link>)}</div>
+          </div>)}
           <Link className={active("/about")} href="/about">About</Link>
           <Link className={active("/resume")} href="/resume">Resume</Link>
           <Link className={active("/contact")} href="/contact">Contact</Link>
@@ -136,7 +134,7 @@ export function ProjectsPage() {
 export function ProjectPage({ project }: { project: (typeof projects)[number] }) {
   if (project.slug === "blacksite") return <BlackSitePage project={project} />;
   if (project.slug === "kill-the-makers") return <KillTheMakersPage project={project} />;
-  return <SiteShell activePath="/projects"><section className="project-hero blacksite-hero"><img src={project.image} alt={`${project.title} project cover`} /><div className="project-hero-shade" /><div className="project-hero-copy"><span className="eyebrow">{project.number} / {project.engine}</span><h1>{project.title}</h1></div></section><div className="blacksite-page generic-project-page">
+  return <SiteShell activePath={`/projects/${project.slug}`}><section className="project-hero blacksite-hero"><img src={project.image} alt={`${project.title} project cover`} /><div className="project-hero-shade" /><div className="project-hero-copy"><span className="eyebrow">{project.number} / {project.engine}</span><h1>{project.title}</h1></div></section><div className="blacksite-page generic-project-page">
     <section className="blacksite-overview"><div className="generic-about-placeholder"><span className="eyebrow">ABOUT</span><div className="blacksite-empty" /></div><dl><div><dt>POSITIONS</dt><dd /></div><div><dt>ENGINE</dt><dd /></div><div><dt>PLATFORM</dt><dd /></div><div><dt>DEVELOPMENT</dt><dd /></div></dl></section>
     <section className="blacksite-section blacksite-empty"><span className="eyebrow">DESCRIPTION</span></section>
     <section className="blacksite-section blacksite-empty"><span className="eyebrow">DESIGN GOALS</span></section>
@@ -147,7 +145,7 @@ export function ProjectPage({ project }: { project: (typeof projects)[number] })
 }
 
 function KillTheMakersPage({ project }: { project: (typeof projects)[number] }) {
-  return <SiteShell activePath="/projects"><section className="project-hero blacksite-hero"><img src="/kill-the-makers-header-capsule.png" alt="Kill the Makers Header Capsule" /><div className="project-hero-shade" /><div className="project-hero-copy"><span className="eyebrow">04 / UNITY</span><h1>Kill the Makers</h1><p>A 2D puzzle-platformer about movement, combat, resource management, and mastering environmental interactions.</p></div></section><div className="blacksite-page kill-makers-page">
+  return <SiteShell activePath={`/projects/${project.slug}`}><section className="project-hero blacksite-hero"><img src="/kill-the-makers-header-capsule.png" alt="Kill the Makers Header Capsule" /><div className="project-hero-shade" /><div className="project-hero-copy"><span className="eyebrow">04 / UNITY</span><h1>Kill the Makers</h1><p>A 2D puzzle-platformer about movement, combat, resource management, and mastering environmental interactions.</p></div></section><div className="blacksite-page kill-makers-page">
     <section className="blacksite-overview"><div className="blacksite-about-media"><video className="blacksite-about-video" controls playsInline preload="metadata" poster="/kill-the-makers-main-capsule.png"><source src="/kill-the-makers-trailer.mp4" type="video/mp4" />Your browser does not support the video player.</video></div><dl><div><dt>POSITIONS</dt><dd>Level Designer<br />Game Designer<br />Audio Designer</dd></div><div><dt>ENGINE</dt><dd>Unity</dd></div><div><dt>PLATFORM</dt><dd>PC</dd></div><div><dt>DEVELOPMENT</dt><dd>4 developers<br />3 months<br />Finished December 2025</dd></div></dl></section>
     <section className="blacksite-section"><span className="eyebrow">DESCRIPTION</span><p className="blacksite-lead">Play as Skidmark the robot and escape from the evil lab.</p><p>As you proceed through the levels, you need to kill the scientists and guards to regain your energy lost over time. With a precise hit of a switch, you decide whether a laser gate is an impassable barrier or your next steppingstone.</p></section>
     <section className="blacksite-section"><span className="eyebrow">DESIGN GOALS</span><div className="blacksite-goals"><article><span>01</span><h3>Progressive Tutorialization</h3><p>Gradually introduce jumping, double jumping, dashing, and combat so players can learn each mechanic clearly before using them together in more challenging situations.</p></article><article><span>02</span><h3>Combat &amp; Resource Management</h3><p>Teach players that combat is connected to survival by introducing enemies with different levels of aggression and showing that defeating enemies allows players to recover lost energy.</p></article><article><span>03</span><h3>Environmental Interaction &amp; Mastery</h3><p>Introduce switches, laser gates, and environmental hazards through clear visual communication, then progressively combine these elements to build a sense of mastery.</p></article></div></section>
@@ -158,7 +156,7 @@ function KillTheMakersPage({ project }: { project: (typeof projects)[number] }) 
 }
 
 function BlackSitePage({ project }: { project: (typeof projects)[number] }) {
-  return <SiteShell activePath="/projects"><section className="project-hero blacksite-hero"><img src={project.image} alt="Half-Life 2: Black Site" /><div className="project-hero-shade" /><div className="project-hero-copy"><span className="eyebrow">03 / HAMMER</span><h1>Half-Life 2:<br className="blacksite-mobile-break" /> Black Site</h1><p>A single-player escape level focused on cover-based combat, environmental puzzles, and a gradual transition from the Citadel to City 17.</p></div></section><div className="blacksite-page">
+  return <SiteShell activePath={`/projects/${project.slug}`}><section className="project-hero blacksite-hero"><img src={project.image} alt="Half-Life 2: Black Site" /><div className="project-hero-shade" /><div className="project-hero-copy"><span className="eyebrow">03 / HAMMER</span><h1>Half-Life 2:<br className="blacksite-mobile-break" /> Black Site</h1><p>A single-player escape level focused on cover-based combat, environmental puzzles, and a gradual transition from the Citadel to City 17.</p></div></section><div className="blacksite-page">
     <section className="blacksite-overview"><div className="blacksite-about-media"><video className="blacksite-about-video" controls playsInline preload="metadata" poster="/LiR_HL2_DesignGoals-poster.jpg"><source src="/LiR_HL2_DesignGoals.mp4" type="video/mp4" />Your browser does not support the video player.</video></div><dl><div><dt>POSITIONS</dt><dd>Level Designer<br />Puzzle Designer<br />Combat Designer</dd></div><div><dt>ENGINE</dt><dd>Hammer</dd></div><div><dt>PLATFORM</dt><dd>PC</dd></div><div><dt>DEVELOPMENT</dt><dd>2 months<br />Finished December 2025</dd></div></dl></section>
     <section className="blacksite-section"><span className="eyebrow">DESCRIPTION</span><p className="blacksite-lead">Half-Life 2: Black Site is a single-player escape level set between <em>Direct Intervention</em> and <em>Lowlife</em> in Half-Life 2: Episode One.</p><p>Captured by the Combine after the Citadel train accident, Gordon Freeman and Alyx Vance must escape a hidden facility by fighting through Combine forces and solving battery-based environmental puzzles. The level focuses on cover-based combat, progressive puzzle teaching, resource management, and a gradual visual transition from Citadel architecture to the streets of City 17.</p></section>
     <section className="blacksite-section"><span className="eyebrow">DESIGN GOALS</span><div className="blacksite-goals"><article><span>01</span><h3>Combat Design</h3><p>Create balanced combat encounters through cover placement, enemy composition, and resource distribution. Combat intensity increases gradually while giving players multiple strategic options.</p></article><article><span>02</span><h3>Puzzle Progression</h3><p>Introduce the battery and one-way fence mechanics through clear, step-by-step teaching, then reinforce learning through repetition, variation, and combination.</p></article><article><span>03</span><h3>Narrative &amp; Environment</h3><p>Guide the player through an escape narrative while using level progression to create direction and accomplishment. The visual style transitions from the industrial Citadel to City 17.</p></article></div></section>

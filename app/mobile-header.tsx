@@ -8,10 +8,10 @@ type ProjectGroup = { label: string; projects: ProjectLink[] };
 
 export function MobileHeader({ activePath, projectGroups }: { activePath: string; projectGroups: ProjectGroup[] }) {
   const [open, setOpen] = useState(false);
-  const [projectsOpen, setProjectsOpen] = useState(false);
+  const [openGroup, setOpenGroup] = useState<string | null>(null);
   const active = (path: string) => activePath === path ? "active" : "";
-  const projectActive = activePath === "/projects" ? "active" : "";
-  const close = () => { setOpen(false); setProjectsOpen(false); };
+  const groupActive = (group: ProjectGroup) => group.projects.some((project) => activePath === `/projects/${project.slug}`) ? "active" : "";
+  const close = () => { setOpen(false); setOpenGroup(null); };
 
   return (
     <header className={`mobile-header ${open ? "is-open" : ""}`}>
@@ -23,10 +23,10 @@ export function MobileHeader({ activePath, projectGroups }: { activePath: string
       </div>
       {open && <nav className="mobile-nav" aria-label="Mobile navigation">
         <Link className={active("/")} href="/" onClick={close}>Home</Link>
-        <div className="mobile-projects">
-          <button className={`mobile-project-trigger ${projectActive}`} type="button" onClick={() => setProjectsOpen((value) => !value)} aria-expanded={projectsOpen}>Projects <span>+</span></button>
-          {projectsOpen && <div className="mobile-project-menu">{projectGroups.map((group) => <div className="mobile-project-group" key={group.label}><p>{group.label}</p>{group.projects.map((project) => <Link key={project.slug} href={`/projects/${project.slug}`} onClick={close}><small>{project.number}</small>{project.title}</Link>)}</div>)}</div>}
-        </div>
+        {projectGroups.map((group) => <div className="mobile-projects" key={group.label}>
+          <button className={`mobile-project-trigger ${groupActive(group)}`} type="button" onClick={() => setOpenGroup((current) => current === group.label ? null : group.label)} aria-expanded={openGroup === group.label}>{group.label} <span>+</span></button>
+          {openGroup === group.label && <div className="mobile-project-menu">{group.projects.map((project) => <Link key={project.slug} href={`/projects/${project.slug}`} onClick={close}><small>{project.number}</small>{project.title}</Link>)}</div>}
+        </div>)}
         <Link className={active("/about")} href="/about" onClick={close}>About</Link>
         <Link className={active("/resume")} href="/resume" onClick={close}>Resume</Link>
         <Link className={active("/contact")} href="/contact" onClick={close}>Contact</Link>
