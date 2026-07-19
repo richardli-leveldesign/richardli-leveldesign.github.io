@@ -59,6 +59,35 @@ const killTheMakersGalleryItems: GalleryItem[] = [
   })),
 ];
 
+const hamsterballinGalleryImageNames = [
+  "Hamsterballin 1-player racing.jpg",
+  "Hamsterballin 2-player split screen.jpg",
+  "Hamsterballin 4-player character select screen.jpg",
+  "Hamsterballin 4-player split screen.jpg",
+  "Hamsterballin Cabelway Entrance.jpg",
+  "Hamsterballin Cableway Track 2.jpg",
+  "Hamsterballin Character - Green Solidier.jpg",
+  "Hamsterballin D20.jpg",
+  "Hamsterballin Hidden Cabelway Entrance.jpg",
+  "Hamsterballin Menu Screen.jpg",
+  "Hamsterballin Pickup Balls.jpg",
+  "Hamsterballin Podium Happy Dance.jpg",
+  "Hamsterballin Shield.jpg",
+  "Hamsterballin Speed Boost.jpg",
+  "Hamsterballin Tack 03 Gatcha Dispenser.jpg",
+  "Hamsterballin Track 03 Cabelway Shortcut.jpg",
+  "Hamsterballin Track 1 Flythrough.jpg",
+  "Hamsterballin Track 2.jpg",
+  "Hamsterballin Wavey Road.jpg",
+];
+
+const hamsterballinGalleryItems: GalleryItem[] = hamsterballinGalleryImageNames.map((name, index) => ({
+  type: "image" as const,
+  src: `/hamsterballin-gallery/${encodeURIComponent(name)}`,
+  thumbnail: `/hamsterballin-gallery/${encodeURIComponent(name)}`,
+  alt: `Hamsterballin' gallery image ${index + 1}: ${name.replace(/^Hamsterballin\s*/, "").replace(/\.jpg$/, "")}`,
+}));
+
 export function BlackSiteGallery({ items = blackSiteGalleryItems }: { items?: GalleryItem[] }) {
   const galleryImages = items;
   const [current, setCurrent] = useState(0);
@@ -170,4 +199,8 @@ export function BlackSiteGallery({ items = blackSiteGalleryItems }: { items?: Ga
 
 export function KillTheMakersGallery() {
   return <BlackSiteGallery items={killTheMakersGalleryItems} />;
+}
+
+export function HamsterballinGallery() {
+  return <BlackSiteGallery items={hamsterballinGalleryItems} />;
 }
