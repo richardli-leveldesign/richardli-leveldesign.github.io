@@ -1,29 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
-const siteOrigin = "https://richardli-leveldesign.github.io";
-
-function originalPageUrl() {
-  return `${siteOrigin}${window.location.pathname}${window.location.search}${window.location.hash}`;
-}
+import { useLanguage } from "./i18n";
 
 export function LanguageSwitcher({ className = "" }: { className?: string }) {
-  const [isChineseView, setIsChineseView] = useState(false);
-
-  useEffect(() => {
-    setIsChineseView(window.location.hostname.includes("translate.goog"));
-  }, []);
-
-  const switchLanguage = () => {
-    if (isChineseView) {
-      window.location.href = originalPageUrl();
-      return;
-    }
-
-    const url = encodeURIComponent(originalPageUrl());
-    window.location.href = `https://translate.google.com/translate?sl=en&tl=zh-CN&hl=zh-CN&u=${url}`;
-  };
-
-  return <button className={`language-switcher ${className}`} type="button" onClick={switchLanguage} aria-label={isChineseView ? "Switch to English" : "切换为中文"}>{isChineseView ? "EN" : "中"}</button>;
+  const { locale, setLocale, dictionary } = useLanguage();
+  const isChinese = locale === "zh";
+  return <button className={`language-switcher ${className}`} type="button" onClick={() => setLocale(isChinese ? "en" : "zh")} aria-label={isChinese ? dictionary.actions.switchToEnglish : dictionary.actions.switchToChinese}>{isChinese ? "EN" : "中"}</button>;
 }

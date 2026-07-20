@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
-import { ProjectPage, projects } from "../../portfolio";
+import { ProjectPage } from "../../portfolio";
+import { projects } from "../../projects-data";
 
 export function generateStaticParams() {
   return projects.filter((project) => !project.underConstruction).map((project) => ({ slug: project.slug }));

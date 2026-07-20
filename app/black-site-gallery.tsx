@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useLanguage } from "./i18n";
 
 declare global {
   interface Window {
@@ -130,8 +131,10 @@ const fireflyGalleryItems: GalleryItem[] = [
   })),
 ];
 
-export function BlackSiteGallery({ items = blackSiteGalleryItems }: { items?: GalleryItem[] }) {
-  const galleryImages = items;
+export function BlackSiteGallery({ items = blackSiteGalleryItems, kind = "blacksite" }: { items?: GalleryItem[]; kind?: "blacksite" | "killTheMakers" | "hamsterballin" | "firefly" }) {
+  const { dictionary } = useLanguage();
+  const content = dictionary as any;
+  const galleryImages = items.map((item, index) => ({ ...item, alt: `${content.gallery[kind]} ${item.type === "video" ? content.gallery.video : content.gallery.image} ${index + 1}` }));
   const [current, setCurrent] = useState(0);
   const [videoPlaying, setVideoPlaying] = useState(false);
   const playerRef = useRef<any>(null);
@@ -200,13 +203,13 @@ export function BlackSiteGallery({ items = blackSiteGalleryItems }: { items?: Ga
   }, [current]);
 
   return (
-    <div className="blacksite-gallery" aria-label="Black Site gallery">
+    <div className="blacksite-gallery" aria-label={`${content.gallery[kind]} ${content.labels.gallery}`}>
       <div className="blacksite-gallery-frame" aria-live="polite">
         {galleryImages[current].type === "video" ? (
           galleryImages[current].src.startsWith("/") ? (
             <video className="blacksite-gallery-video" controls playsInline preload="metadata" onEnded={next}>
               <source src={galleryImages[current].src} type="video/mp4" />
-              Your browser does not support the video player.
+              {content.labels.browserVideoUnsupported}
             </video>
           ) : (
             <iframe id="blacksite-youtube-player" className="blacksite-gallery-video" src={galleryImages[current].src} title={galleryImages[current].alt} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
@@ -214,17 +217,17 @@ export function BlackSiteGallery({ items = blackSiteGalleryItems }: { items?: Ga
         ) : (
           <img src={galleryImages[current].src} alt={galleryImages[current].alt} />
         )}
-        <button className="gallery-arrow gallery-arrow-left" type="button" onClick={previous} aria-label="Previous gallery image">←</button>
-        <button className="gallery-arrow gallery-arrow-right" type="button" onClick={next} aria-label="Next gallery image">→</button>
+        <button className="gallery-arrow gallery-arrow-left" type="button" onClick={previous} aria-label={content.labels.previous}>←</button>
+        <button className="gallery-arrow gallery-arrow-right" type="button" onClick={next} aria-label={content.labels.next}>→</button>
       </div>
-      <div className="blacksite-gallery-thumbnails" aria-label="Choose a gallery image">
+      <div className="blacksite-gallery-thumbnails" aria-label={content.labels.chooseGallery}>
         {galleryImages.map((image, index) => (
           <button
             key={image.src}
             className={`gallery-thumbnail${index === current ? " is-active" : ""}`}
             type="button"
             onClick={() => setCurrent(index)}
-            aria-label={`Show gallery image ${index + 1}`}
+            aria-label={`${content.labels.showGallery} ${index + 1}`}
             aria-current={index === current ? "true" : undefined}
           >
             <img src={image.thumbnail} alt="" />
@@ -233,20 +236,20 @@ export function BlackSiteGallery({ items = blackSiteGalleryItems }: { items?: Ga
       </div>
       <div className="blacksite-gallery-meta">
         <span>{String(current + 1).padStart(2, "0")} / {String(galleryImages.length).padStart(2, "0")}</span>
-        <span>Auto play</span>
+        <span>{content.labels.autoPlay}</span>
       </div>
     </div>
   );
 }
 
 export function KillTheMakersGallery() {
-  return <BlackSiteGallery items={killTheMakersGalleryItems} />;
+  return <BlackSiteGallery items={killTheMakersGalleryItems} kind="killTheMakers" />;
 }
 
 export function HamsterballinGallery() {
-  return <BlackSiteGallery items={hamsterballinGalleryItems} />;
+  return <BlackSiteGallery items={hamsterballinGalleryItems} kind="hamsterballin" />;
 }
 
 export function FireflyGallery() {
-  return <BlackSiteGallery items={fireflyGalleryItems} />;
+  return <BlackSiteGallery items={fireflyGalleryItems} kind="firefly" />;
 }
