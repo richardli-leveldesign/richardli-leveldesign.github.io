@@ -6,6 +6,9 @@ import zh from "./locales/zh.json";
 
 type Locale = "en" | "zh";
 type Dictionary = typeof en;
+const correctedChineseDictionary = JSON.parse(
+  JSON.stringify(zh).replaceAll("李睿驰", "李瑞驰"),
+) as Dictionary;
 
 type LanguageContextValue = {
   locale: Locale;
@@ -19,7 +22,7 @@ const languageStorageKey = "ruichi-li-portfolio-language";
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [locale, setLocale] = useState<Locale>("en");
   const [hasLoadedPreference, setHasLoadedPreference] = useState(false);
-  const dictionary = locale === "zh" ? (zh as Dictionary) : en;
+  const dictionary = locale === "zh" ? correctedChineseDictionary : en;
 
   useEffect(() => {
     const savedLocale = window.localStorage.getItem(languageStorageKey);
