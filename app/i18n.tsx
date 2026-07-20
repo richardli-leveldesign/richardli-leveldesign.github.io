@@ -14,14 +14,27 @@ type LanguageContextValue = {
 };
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
+const languageStorageKey = "ruichi-li-portfolio-language";
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [locale, setLocale] = useState<Locale>("en");
+  const [hasLoadedPreference, setHasLoadedPreference] = useState(false);
   const dictionary = locale === "zh" ? (zh as Dictionary) : en;
 
   useEffect(() => {
+    const savedLocale = window.localStorage.getItem(languageStorageKey);
+    if (savedLocale === "en" || savedLocale === "zh") {
+      setLocale(savedLocale);
+    }
+    setHasLoadedPreference(true);
+  }, []);
+
+  useEffect(() => {
     document.documentElement.lang = locale === "zh" ? "zh-CN" : "en";
-  }, [locale]);
+    if (hasLoadedPreference) {
+      window.localStorage.setItem(languageStorageKey, locale);
+    }
+  }, [hasLoadedPreference, locale]);
 
   const value = useMemo(() => ({ locale, dictionary, setLocale }), [locale, dictionary]);
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
