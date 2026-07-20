@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { LanguageSwitcher } from "./language-switcher";
 import { MobileHeader } from "./mobile-header";
 import { BlackSiteGallery, FireflyGallery, HamsterballinGallery, KillTheMakersGallery } from "./black-site-gallery";
 
@@ -90,6 +91,7 @@ export function SiteShell({ children, activePath = "/" }: { children: ReactNode;
         </nav>
         <Link className="brand" href="/" aria-label="Ruichi Li home"><span>RUICHI LI</span></Link>
         <div className="header-socials" aria-label="Contact links">
+          <LanguageSwitcher />
           <a href="mailto:ruichil1030@gmail.com" aria-label="Email Ruichi Li">✉</a>
           <a href="https://www.linkedin.com/in/ruichi-li-9903372b1/" target="_blank" rel="noreferrer" aria-label="Ruichi Li on LinkedIn">in</a>
         </div>

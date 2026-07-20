@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { LanguageSwitcher } from "./language-switcher";
 
 type ProjectLink = { slug: string; title: string; number: string };
 type ProjectGroup = { label: string; projects: ProjectLink[] };
@@ -17,9 +18,7 @@ export function MobileHeader({ activePath, projectGroups }: { activePath: string
     <header className={`mobile-header ${open ? "is-open" : ""}`}>
       <div className="mobile-header-bar">
         <Link className="mobile-brand" href="/" onClick={close}>Ruichi Li</Link>
-        <button className="mobile-menu-button" type="button" aria-label={open ? "Close navigation" : "Open navigation"} aria-expanded={open} onClick={() => setOpen((value) => !value)}>
-          <span /><span />
-        </button>
+        <div className="mobile-header-actions"><LanguageSwitcher /><button className="mobile-menu-button" type="button" aria-label={open ? "Close navigation" : "Open navigation"} aria-expanded={open} onClick={() => setOpen((value) => !value)}><span /><span /></button></div>
       </div>
       {open && <nav className="mobile-nav" aria-label="Mobile navigation">
         <Link className={active("/")} href="/" onClick={close}>Home</Link>
