@@ -115,12 +115,20 @@ const fireflyGalleryImageNames = [
   "image22.jpeg",
 ];
 
-const fireflyGalleryItems: GalleryItem[] = fireflyGalleryImageNames.map((name, index) => ({
-  type: "image" as const,
-  src: `/firefly-gallery/${name}`,
-  thumbnail: `/firefly-gallery/${name}`,
-  alt: `Starfield: Firefly gallery image ${index + 1}`,
-}));
+const fireflyGalleryItems: GalleryItem[] = [
+  {
+    type: "video" as const,
+    src: "https://www.youtube.com/embed/N-Jp-nm15Kg?enablejsapi=1&origin=https%3A%2F%2Frichardli-leveldesign.github.io&rel=0&vq=hd720",
+    thumbnail: "https://img.youtube.com/vi/N-Jp-nm15Kg/hqdefault.jpg",
+    alt: "Starfield: Firefly video",
+  },
+  ...fireflyGalleryImageNames.map((name, index) => ({
+    type: "image" as const,
+    src: `/firefly-gallery/${name}`,
+    thumbnail: `/firefly-gallery/${name}`,
+    alt: `Starfield: Firefly gallery image ${index + 1}`,
+  })),
+];
 
 export function BlackSiteGallery({ items = blackSiteGalleryItems }: { items?: GalleryItem[] }) {
   const galleryImages = items;
@@ -201,7 +209,7 @@ export function BlackSiteGallery({ items = blackSiteGalleryItems }: { items?: Ga
               Your browser does not support the video player.
             </video>
           ) : (
-            <iframe id="blacksite-youtube-player" className="blacksite-gallery-video" src={galleryImages[current].src} title="Black Site video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
+            <iframe id="blacksite-youtube-player" className="blacksite-gallery-video" src={galleryImages[current].src} title={galleryImages[current].alt} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
           )
         ) : (
           <img src={galleryImages[current].src} alt={galleryImages[current].alt} />
