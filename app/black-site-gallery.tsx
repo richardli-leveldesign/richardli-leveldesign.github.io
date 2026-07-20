@@ -96,6 +96,32 @@ const hamsterballinGalleryItems: GalleryItem[] = [
   })),
 ];
 
+const fireflyGalleryImageNames = [
+  "image7.png",
+  "image8.png",
+  "image9.png",
+  "image10.png",
+  "image11.png",
+  "image12.png",
+  "image13.png",
+  "image14.png",
+  "image15.png",
+  "image16.jpeg",
+  "image17.jpeg",
+  "image18.jpeg",
+  "image19.jpeg",
+  "image20.jpeg",
+  "image21.jpeg",
+  "image22.jpeg",
+];
+
+const fireflyGalleryItems: GalleryItem[] = fireflyGalleryImageNames.map((name, index) => ({
+  type: "image" as const,
+  src: `/firefly-gallery/${name}`,
+  thumbnail: `/firefly-gallery/${name}`,
+  alt: `Starfield: Firefly gallery image ${index + 1}`,
+}));
+
 export function BlackSiteGallery({ items = blackSiteGalleryItems }: { items?: GalleryItem[] }) {
   const galleryImages = items;
   const [current, setCurrent] = useState(0);
@@ -211,4 +237,8 @@ export function KillTheMakersGallery() {
 
 export function HamsterballinGallery() {
   return <BlackSiteGallery items={hamsterballinGalleryItems} />;
+}
+
+export function FireflyGallery() {
+  return <BlackSiteGallery items={fireflyGalleryItems} />;
 }
