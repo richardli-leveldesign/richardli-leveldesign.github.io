@@ -7,7 +7,7 @@ import zh from "./locales/zh.json";
 type Locale = "en" | "zh";
 type Dictionary = typeof en;
 const correctedChineseDictionary = JSON.parse(
-  JSON.stringify(zh).replaceAll("李睿驰", "李瑞驰"),
+  JSON.stringify(zh).split("李睿驰").join("李瑞驰"),
 ) as Dictionary;
 
 type LanguageContextValue = {
