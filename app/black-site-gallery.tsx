@@ -131,7 +131,18 @@ const fireflyGalleryItems: GalleryItem[] = [
   })),
 ];
 
-export function BlackSiteGallery({ items = blackSiteGalleryItems, kind = "blacksite" }: { items?: GalleryItem[]; kind?: "blacksite" | "killTheMakers" | "hamsterballin" | "firefly" }) {
+const pitStopCover = "https://images.squarespace-cdn.com/content/v1/6a414942f5d99e4efb38d03f/71b4cc97-458a-4a6c-a80d-43c4550e7c69/%E5%B7%B2%E7%94%9F%E6%88%90%E5%9B%BE%E5%83%8F+1+%283%29.png?format=1000w";
+
+const pitStopGalleryItems: GalleryItem[] = [
+  {
+    type: "image" as const,
+    src: pitStopCover,
+    thumbnail: pitStopCover,
+    alt: "Half-Life 2: Pit Stop project cover",
+  },
+];
+
+export function BlackSiteGallery({ items = blackSiteGalleryItems, kind = "blacksite" }: { items?: GalleryItem[]; kind?: "blacksite" | "killTheMakers" | "hamsterballin" | "firefly" | "pitStop" }) {
   const { dictionary } = useLanguage();
   const content = dictionary as any;
   const galleryImages = items.map((item, index) => ({ ...item, alt: `${content.gallery[kind]} ${item.type === "video" ? content.gallery.video : content.gallery.image} ${index + 1}` }));
@@ -252,4 +263,8 @@ export function HamsterballinGallery() {
 
 export function FireflyGallery() {
   return <BlackSiteGallery items={fireflyGalleryItems} kind="firefly" />;
+}
+
+export function PitStopGallery() {
+  return <BlackSiteGallery items={pitStopGalleryItems} kind="pitStop" />;
 }
