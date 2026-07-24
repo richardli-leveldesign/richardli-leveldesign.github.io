@@ -148,15 +148,23 @@ const pitStopGalleryItems: GalleryItem[] = [
   })),
 ];
 
-const quakeSplitGalleryItems: GalleryItem[] = Array.from({ length: 15 }, (_, index) => {
-  const imageNumber = index + 7;
-  return {
-    type: "image" as const,
-    src: `/quake-3-details/image${imageNumber}.jpeg`,
-    thumbnail: `/quake-3-details/image${imageNumber}.jpeg`,
-    alt: `Quake 3: The Split gallery image ${index + 1}`,
-  };
-});
+const quakeSplitGalleryItems: GalleryItem[] = [
+  {
+    type: "video" as const,
+    src: "https://www.youtube.com/embed/rH4ZXPUQPJ4?enablejsapi=1&origin=https%3A%2F%2Frichardli-leveldesign.github.io&rel=0&vq=hd720",
+    thumbnail: "https://img.youtube.com/vi/rH4ZXPUQPJ4/hqdefault.jpg",
+    alt: "Quake 3: The Split gameplay video",
+  },
+  ...Array.from({ length: 15 }, (_, index) => {
+    const imageNumber = index + 7;
+    return {
+      type: "image" as const,
+      src: `/quake-3-details/image${imageNumber}.jpeg`,
+      thumbnail: `/quake-3-details/image${imageNumber}.jpeg`,
+      alt: `Quake 3: The Split gallery image ${index + 1}`,
+    };
+  }),
+];
 
 export function BlackSiteGallery({ items = blackSiteGalleryItems, kind = "blacksite" }: { items?: GalleryItem[]; kind?: "blacksite" | "killTheMakers" | "hamsterballin" | "firefly" | "pitStop" | "quakeSplit" }) {
   const { dictionary } = useLanguage();
