@@ -2,12 +2,23 @@
 
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import en from "./locales/en.json";
+import pitStopEn from "./locales/pit-stop-en.json";
+import pitStopZh from "./locales/pit-stop-zh.json";
 import zh from "./locales/zh.json";
 
 type Locale = "en" | "zh";
 type Dictionary = typeof en;
+const englishDictionary = {
+  ...en,
+  projects: { ...en.projects, "pit-stop": pitStopEn },
+} as Dictionary;
 const correctedChineseDictionary = JSON.parse(
   JSON.stringify(zh).split("李睿驰").join("李瑞驰"),
+) as Dictionary;
+const mergedChineseDictionary = JSON.parse(
+  JSON.stringify({ ...zh, projects: { ...zh.projects, "pit-stop": pitStopZh } })
+    .split("\u674e\u777f\u9a70")
+    .join("\u674e\u745e\u9a70"),
 ) as Dictionary;
 
 type LanguageContextValue = {
@@ -22,7 +33,7 @@ const languageStorageKey = "ruichi-li-portfolio-language";
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [locale, setLocale] = useState<Locale>("en");
   const [hasLoadedPreference, setHasLoadedPreference] = useState(false);
-  const dictionary = locale === "zh" ? correctedChineseDictionary : en;
+  const dictionary = locale === "zh" ? mergedChineseDictionary : englishDictionary;
 
   useEffect(() => {
     const savedLocale = window.localStorage.getItem(languageStorageKey);

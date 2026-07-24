@@ -131,16 +131,14 @@ const fireflyGalleryItems: GalleryItem[] = [
   })),
 ];
 
-const pitStopCover = "https://images.squarespace-cdn.com/content/v1/6a414942f5d99e4efb38d03f/71b4cc97-458a-4a6c-a80d-43c4550e7c69/%E5%B7%B2%E7%94%9F%E6%88%90%E5%9B%BE%E5%83%8F+1+%283%29.png?format=1000w";
+const pitStopGalleryImageNames = Array.from({ length: 15 }, (_, index) => `image${index + 9}.jpeg`);
 
-const pitStopGalleryItems: GalleryItem[] = [
-  {
-    type: "image" as const,
-    src: pitStopCover,
-    thumbnail: pitStopCover,
-    alt: "Half-Life 2: Pit Stop project cover",
-  },
-];
+const pitStopGalleryItems: GalleryItem[] = pitStopGalleryImageNames.map((name, index) => ({
+  type: "image" as const,
+  src: `/pit-stop-gallery/${name}`,
+  thumbnail: `/pit-stop-gallery/${name}`,
+  alt: `Half-Life 2: Pit Stop gallery image ${index + 1}`,
+}));
 
 export function BlackSiteGallery({ items = blackSiteGalleryItems, kind = "blacksite" }: { items?: GalleryItem[]; kind?: "blacksite" | "killTheMakers" | "hamsterballin" | "firefly" | "pitStop" }) {
   const { dictionary } = useLanguage();

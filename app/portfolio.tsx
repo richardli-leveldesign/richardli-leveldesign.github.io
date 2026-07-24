@@ -16,7 +16,7 @@ const detailAssets: Record<string, string[]> = {
   firefly: ["/firefly-details/image1.jpeg", "/firefly-details/image2.jpeg", "/firefly-details/image3.jpeg", "/firefly-details/image4.jpeg", "/firefly-details/image5.jpeg", "/firefly-details/image6.jpeg"],
   blacksite: ["/black-site-details/image1.jpeg", "/black-site-details/image2.jpeg", "/black-site-details/image3.jpeg", "/black-site-details/image4.jpeg", "/black-site-details/image5.jpeg", "/black-site-details/image6.jpeg", "/black-site-details/image7.jpeg"],
   "kill-the-makers": ["/kill-the-makers-detail/image1.jpeg", "/kill-the-makers-detail/image2.jpeg", "/kill-the-makers-detail/image3.jpeg", "/kill-the-makers-detail/image4.jpeg", "/kill-the-makers-detail/image5.jpeg", "/kill-the-makers-detail/image6.jpeg", "/kill-the-makers-detail/image7.jpeg"],
-  "pit-stop": []
+  "pit-stop": ["/pit-stop-details/image1.jpeg", "/pit-stop-details/image2.jpeg", "/pit-stop-details/image3.jpeg", "/pit-stop-details/image4.jpeg", "/pit-stop-details/image5.gif", "/pit-stop-details/image6.jpeg", "/pit-stop-details/image7.jpeg", "/pit-stop-details/image8.jpeg"]
 };
 
 const heroAssets: Record<string, string> = {
@@ -91,7 +91,7 @@ function ProjectDetail({ slug }: { slug: string }) {
   const content = dictionary as any;
   const project = content.projects[slug];
   if (!project?.description) return null;
-  const media = slug === "firefly" || slug === "pit-stop" ? <img className="blacksite-about-video" src={slug === "pit-stop" ? heroAssets[slug] : "/firefly-video-placeholder.png"} alt={project.mediaAlt} /> : <video className="blacksite-about-video" controls playsInline preload="metadata" poster={slug === "blacksite" ? "/LiR_HL2_DesignGoals-poster.jpg" : slug === "kill-the-makers" ? "/kill-the-makers-main-capsule.png" : "/hamsterballin-trailer-poster.png"}><source src={slug === "blacksite" ? "/LiR_HL2_DesignGoals.mp4" : slug === "kill-the-makers" ? "/kill-the-makers-trailer.mp4" : "/hamsterballin-gameplay-trailer.mp4"} type="video/mp4" />{content.labels.browserVideoUnsupported}</video>;
+  const media = slug === "firefly" ? <img className="blacksite-about-video" src="/firefly-video-placeholder.png" alt={project.mediaAlt} /> : <video className="blacksite-about-video" controls playsInline preload="metadata" poster={slug === "blacksite" ? "/LiR_HL2_DesignGoals-poster.jpg" : slug === "kill-the-makers" ? "/kill-the-makers-main-capsule.png" : slug === "pit-stop" ? heroAssets[slug] : "/hamsterballin-trailer-poster.png"}><source src={slug === "blacksite" ? "/LiR_HL2_DesignGoals.mp4" : slug === "kill-the-makers" ? "/kill-the-makers-trailer.mp4" : slug === "pit-stop" ? "/pit-stop-trailer.mp4" : "/hamsterballin-gameplay-trailer.mp4"} type="video/mp4" />{content.labels.browserVideoUnsupported}</video>;
   const infoLabels = [content.labels.positions, content.labels.engine, content.labels.platform, content.labels.development];
   let imageIndex = 0;
   return <><section className="project-hero blacksite-hero"><img src={heroAssets[slug]} alt={project.coverAlt} /><div className="project-hero-shade" /><div className="project-hero-copy"><span className="eyebrow">{project.number} / {project.engine}</span><h1>{project.title}</h1><p>{project.heroDescription}</p></div></section><div className={`blacksite-page ${slug}-page`}>

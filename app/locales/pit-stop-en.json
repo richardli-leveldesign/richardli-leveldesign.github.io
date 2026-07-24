@@ -1,0 +1,47 @@
+{
+  "number": "05",
+  "title": "Half-Life 2: Pit Stop",
+  "engine": "Hammer",
+  "role": "Level Designer / Puzzle Designer / Combat Designer",
+  "subtitle": "A post-Episode Two Resistance raid",
+  "cardDescription": "A Half-Life 2 level where player actions visibly reshape the environment, turning a Combine yard into a changing combat space.",
+  "coverAlt": "Half-Life 2: Pit Stop project cover",
+  "heroDescription": "After White Forest, Gordon raids a nearby Combine warehouse to find a replacement engine for the Resistance's scrap-car race.",
+  "mediaAlt": "Half-Life 2: Pit Stop trailer",
+  "info": [["Level Designer", "Puzzle Designer", "Combat Designer"], ["Hammer"], ["PC"], ["Finished July 2026"]],
+  "description": {
+    "lead": "Pit Stop is a custom single-player level made for Half-Life 2, set after the end of Half-Life 2: Episode Two.",
+    "paragraphs": ["To celebrate the victory at White Forest, the Resistance organizes a scrap-car race. Gordon is the favorite to win, but his engine breaks down on the way. A Combine warehouse happens to be nearby, so it is time to raid Civil Protection for a new engine."]
+  },
+  "goals": [
+    {"title": "Make Player Actions Visibly Transform the Environment", "body": "Let players see direct consequences of their actions, such as opening doors, disabling fences, and changing the layout of the yard."},
+    {"title": "Use Cinematic Moments to Support Gameplay", "body": "Design cargo drops and leap-of-faith moments to create visual impact while also changing gameplay and pacing."},
+    {"title": "Create Meaningful Spatial Reuse", "body": "Revisit the same space with new cover layouts, enemy setups, and gameplay purposes so every return feels fresh and meaningful."}
+  ],
+  "details": [
+    {"type": "heading", "text": "Make Player Actions Visibly Transform the Environment"},
+    {"type": "paragraph", "text": "A key design goal was to make the player's actions produce clear and visible changes in the environment. Instead of presenting puzzles as isolated interactions, I connected them to changes that the player could immediately observe. Using a power plug, for example, can open a door or deactivate a Combine fence, clearly communicating the relationship between an action and its consequence."},
+    {"type": "image", "alt": "Pit Stop power plug route"},
+    {"type": "image", "alt": "Pit Stop power plug opening a door"},
+    {"type": "paragraph", "text": "This idea is further emphasized through the crane sequences. When the player activates a crane, a cargo container physically falls into the yard, crushes enemies, and changes the layout of the space. The player is not only progressing through the level; they are actively transforming the environment. These visible changes reinforce player agency and make the world feel responsive to the player's decisions."},
+    {"type": "image", "alt": "Pit Stop cargo container setup"},
+    {"type": "image", "alt": "Pit Stop cargo container changing the yard"},
+    {"type": "heading", "text": "Cinematic Moments"},
+    {"type": "paragraph", "text": "To create impactful cinematic moments, I designed two major set pieces involving falling cargo containers. At two different points in the level, players can activate crane controls to release containers from above."},
+    {"type": "paragraph", "text": "Screen shake and sound effects enhance the sense of impact. Enemies are positioned beneath the containers so the falling cargo can crush them; their vocal reactions further reinforce the physicality of the event and make the sequence more dynamic and memorable."},
+    {"type": "image", "alt": "Pit Stop crane cargo-drop sequence"},
+    {"type": "heading", "text": "Spatial Reuse"},
+    {"type": "paragraph", "text": "The cargo containers serve not only as cinematic elements, but also as tools for spatial reuse. The yard is revisited multiple times throughout the level, but each visit offers a different experience."},
+    {"type": "paragraph", "text": "Once a container has fallen, it changes the player's sightlines, available cover, and movement options. The yard evolves from a familiar environment into a reconfigured combat arena, allowing the player to experience a new combat scenario while still recognizing the original layout."},
+    {"type": "image", "alt": "Pit Stop yard before spatial change"},
+    {"type": "image", "alt": "Pit Stop yard reconfigured by cargo"},
+    {"type": "image", "alt": "Pit Stop reused yard combat space"}
+  ],
+  "postmortem": [
+    {"title": "What Went Well", "items": ["The cargo-container events combined cinematic impact with gameplay consequences by crushing enemies and changing the yard's layout.", "Spatial reuse worked effectively because changes to sightlines, cover, and enemy placement made each return to the yard feel different.", "The power-plug mechanic clearly connected player actions with environmental changes, such as opening doors and disabling Combine fences."]},
+    {"title": "What Went Wrong", "items": ["The power-plug mechanic was sometimes difficult to implement smoothly, especially when players had to pick up, carry, and place the plug.", "The crane and cargo-container sequences required additional testing to ensure that containers moved and landed correctly.", "Some enemy AI and scripted encounters did not always behave as intended, which affected combat pacing."]},
+    {"title": "What I Learned", "items": ["Cinematic moments are more meaningful when they also affect gameplay and give the player new strategic options.", "Spatial reuse requires changes in layout, combat conditions, and player objectives to avoid feeling repetitive.", "Interactive mechanics should be tested early because they can affect physics, AI, scripting, and level progression."]}
+  ],
+  "metaTitle": "Half-Life 2: Pit Stop — Ruichi Li",
+  "metaDescription": "Level, puzzle, and combat design for Half-Life 2: Pit Stop."
+}
