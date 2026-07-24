@@ -148,10 +148,18 @@ const pitStopGalleryItems: GalleryItem[] = [
   })),
 ];
 
-export function BlackSiteGallery({ items = blackSiteGalleryItems, kind = "blacksite" }: { items?: GalleryItem[]; kind?: "blacksite" | "killTheMakers" | "hamsterballin" | "firefly" | "pitStop" }) {
+const quakeSplitGalleryItems: GalleryItem[] = [{
+  type: "image" as const,
+  src: "/quake-3-the-split-cover.png",
+  thumbnail: "/quake-3-the-split-cover.png",
+  alt: "Quake 3: The Split project cover",
+}];
+
+export function BlackSiteGallery({ items = blackSiteGalleryItems, kind = "blacksite" }: { items?: GalleryItem[]; kind?: "blacksite" | "killTheMakers" | "hamsterballin" | "firefly" | "pitStop" | "quakeSplit" }) {
   const { dictionary } = useLanguage();
   const content = dictionary as any;
-  const galleryImages = items.map((item, index) => ({ ...item, alt: `${content.gallery[kind]} ${item.type === "video" ? content.gallery.video : content.gallery.image} ${index + 1}` }));
+  const galleryTitle = content.gallery[kind] || content.projects["quake-3-the-split"]?.title;
+  const galleryImages = items.map((item, index) => ({ ...item, alt: `${galleryTitle} ${item.type === "video" ? content.gallery.video : content.gallery.image} ${index + 1}` }));
   const [current, setCurrent] = useState(0);
   const [videoPlaying, setVideoPlaying] = useState(false);
   const playerRef = useRef<any>(null);
@@ -220,7 +228,7 @@ export function BlackSiteGallery({ items = blackSiteGalleryItems, kind = "blacks
   }, [current]);
 
   return (
-    <div className="blacksite-gallery" aria-label={`${content.gallery[kind]} ${content.labels.gallery}`}>
+    <div className="blacksite-gallery" aria-label={`${galleryTitle} ${content.labels.gallery}`}>
       <div className="blacksite-gallery-frame" aria-live="polite">
         {galleryImages[current].type === "video" ? (
           galleryImages[current].src.startsWith("/") ? (
@@ -273,4 +281,8 @@ export function FireflyGallery() {
 
 export function PitStopGallery() {
   return <BlackSiteGallery items={pitStopGalleryItems} kind="pitStop" />;
+}
+
+export function QuakeSplitGallery() {
+  return <BlackSiteGallery items={quakeSplitGalleryItems} kind="quakeSplit" />;
 }

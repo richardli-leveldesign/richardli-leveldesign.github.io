@@ -3,7 +3,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { useEffect } from "react";
-import { BlackSiteGallery, FireflyGallery, HamsterballinGallery, KillTheMakersGallery, PitStopGallery } from "./black-site-gallery";
+import { BlackSiteGallery, FireflyGallery, HamsterballinGallery, KillTheMakersGallery, PitStopGallery, QuakeSplitGallery } from "./black-site-gallery";
 import { useLanguage } from "./i18n";
 import { LanguageSwitcher } from "./language-switcher";
 import { MobileHeader } from "./mobile-header";
@@ -16,7 +16,8 @@ const detailAssets: Record<string, string[]> = {
   firefly: ["/firefly-details/image1.jpeg", "/firefly-details/image2.jpeg", "/firefly-details/image3.jpeg", "/firefly-details/image4.jpeg", "/firefly-details/image5.jpeg", "/firefly-details/image6.jpeg"],
   blacksite: ["/black-site-details/image1.jpeg", "/black-site-details/image2.jpeg", "/black-site-details/image3.jpeg", "/black-site-details/image4.jpeg", "/black-site-details/image5.jpeg", "/black-site-details/image6.jpeg", "/black-site-details/image7.jpeg"],
   "kill-the-makers": ["/kill-the-makers-detail/image1.jpeg", "/kill-the-makers-detail/image2.jpeg", "/kill-the-makers-detail/image3.jpeg", "/kill-the-makers-detail/image4.jpeg", "/kill-the-makers-detail/image5.jpeg", "/kill-the-makers-detail/image6.jpeg", "/kill-the-makers-detail/image7.jpeg"],
-  "pit-stop": ["/pit-stop-details/image1.jpeg", "/pit-stop-details/image2.jpeg", "/pit-stop-details/image3.jpeg", "/pit-stop-details/image4.jpeg", "/pit-stop-details/image5.gif", "/pit-stop-details/image7.jpeg", "/pit-stop-details/image6.jpeg", "/pit-stop-details/image8.jpeg"]
+  "pit-stop": ["/pit-stop-details/image1.jpeg", "/pit-stop-details/image2.jpeg", "/pit-stop-details/image3.jpeg", "/pit-stop-details/image4.jpeg", "/pit-stop-details/image5.gif", "/pit-stop-details/image7.jpeg", "/pit-stop-details/image6.jpeg", "/pit-stop-details/image8.jpeg"],
+  "quake-3-the-split": []
 };
 
 const heroAssets: Record<string, string> = {
@@ -24,7 +25,8 @@ const heroAssets: Record<string, string> = {
   firefly: projects[1].image,
   blacksite: projects[2].image,
   "kill-the-makers": "/kill-the-makers-hero-wide.png",
-  "pit-stop": projects[4].image
+  "pit-stop": projects[4].image,
+  "quake-3-the-split": projects[5].image
 };
 
 function DocumentMetadata({ activePath }: { activePath: string }) {
@@ -52,7 +54,7 @@ export function SiteShell({ children, activePath = "/" }: { children: ReactNode;
   const visibleProjects = projects.filter((project) => !project.underConstruction).map((project) => ({ slug: project.slug, number: project.number, title: content.projects[project.slug].title }));
   const projectGroups = [
     { label: content.nav.teamProjects, projects: visibleProjects.filter((project) => project.slug === "kill-the-makers" || project.slug === "hamsterballin") },
-    { label: content.nav.individualProjects, projects: visibleProjects.filter((project) => project.slug === "firefly" || project.slug === "blacksite" || project.slug === "pit-stop") }
+    { label: content.nav.individualProjects, projects: visibleProjects.filter((project) => project.slug === "firefly" || project.slug === "blacksite" || project.slug === "pit-stop" || project.slug === "quake-3-the-split") }
   ];
   const groupActive = (group: (typeof projectGroups)[number]) => group.projects.some((project) => activePath === `/projects/${project.slug}`) ? "active" : "";
   return <div className="site-shell">
@@ -91,7 +93,7 @@ function ProjectDetail({ slug }: { slug: string }) {
   const content = dictionary as any;
   const project = content.projects[slug];
   if (!project?.description) return null;
-  const media = slug === "firefly" ? <img className="blacksite-about-video" src="/firefly-video-placeholder.png" alt={project.mediaAlt} /> : <video className="blacksite-about-video" controls playsInline preload="metadata" poster={slug === "blacksite" ? "/LiR_HL2_DesignGoals-poster.jpg" : slug === "kill-the-makers" ? "/kill-the-makers-main-capsule.png" : slug === "pit-stop" ? heroAssets[slug] : "/hamsterballin-trailer-poster.png"}><source src={slug === "blacksite" ? "/LiR_HL2_DesignGoals.mp4" : slug === "kill-the-makers" ? "/kill-the-makers-trailer.mp4" : slug === "pit-stop" ? "/pit-stop-trailer.mp4" : "/hamsterballin-gameplay-trailer.mp4"} type="video/mp4" />{content.labels.browserVideoUnsupported}</video>;
+  const media = slug === "firefly" ? <img className="blacksite-about-video" src="/firefly-video-placeholder.png" alt={project.mediaAlt} /> : slug === "quake-3-the-split" ? <img className="blacksite-about-video" src={heroAssets[slug]} alt={project.mediaAlt} /> : <video className="blacksite-about-video" controls playsInline preload="metadata" poster={slug === "blacksite" ? "/LiR_HL2_DesignGoals-poster.jpg" : slug === "kill-the-makers" ? "/kill-the-makers-main-capsule.png" : slug === "pit-stop" ? heroAssets[slug] : "/hamsterballin-trailer-poster.png"}><source src={slug === "blacksite" ? "/LiR_HL2_DesignGoals.mp4" : slug === "kill-the-makers" ? "/kill-the-makers-trailer.mp4" : slug === "pit-stop" ? "/pit-stop-trailer.mp4" : "/hamsterballin-gameplay-trailer.mp4"} type="video/mp4" />{content.labels.browserVideoUnsupported}</video>;
   const infoLabels = [content.labels.positions, content.labels.engine, content.labels.platform, content.labels.development];
   let imageIndex = 0;
   return <><section className="project-hero blacksite-hero"><img src={heroAssets[slug]} alt={project.coverAlt} /><div className="project-hero-shade" /><div className="project-hero-copy"><span className="eyebrow">{project.number} / {project.engine}</span><h1>{project.title}</h1><p>{project.heroDescription}</p></div></section><div className={`blacksite-page ${slug}-page`}>
@@ -104,7 +106,7 @@ function ProjectDetail({ slug }: { slug: string }) {
   </div></>;
 }
 
-function ProjectGallery({ slug }: { slug: string }) { if (slug === "blacksite") return <BlackSiteGallery />; if (slug === "kill-the-makers") return <KillTheMakersGallery />; if (slug === "hamsterballin") return <HamsterballinGallery />; if (slug === "pit-stop") return <PitStopGallery />; return <FireflyGallery />; }
+function ProjectGallery({ slug }: { slug: string }) { if (slug === "blacksite") return <BlackSiteGallery />; if (slug === "kill-the-makers") return <KillTheMakersGallery />; if (slug === "hamsterballin") return <HamsterballinGallery />; if (slug === "pit-stop") return <PitStopGallery />; if (slug === "quake-3-the-split") return <QuakeSplitGallery />; return <FireflyGallery />; }
 
 export function AboutPage() { return <SiteShell activePath="/about"><AboutContent /></SiteShell>; }
 function AboutContent() { const { dictionary } = useLanguage(); const content = (dictionary as any).about; const actions = (dictionary as any).actions; return <><section className="about-custom-hero"><div><span className="eyebrow">{content.eyebrow}</span><h1>{content.headline}</h1></div><img src="/about-richard.jpg" alt={content.portraitAlt} /></section><section className="about-custom-story"><div className="about-custom-copy"><span className="eyebrow">{content.playerEyebrow}</span>{content.paragraphs.map((paragraph: string) => <p key={paragraph}>{paragraph}</p>)}<h2>{content.statement}<br /><em>{content.statementEmphasis}</em></h2></div><figure><img src="/about-handhelds.jpg" alt={content.handheldAlt} /></figure></section><section className="about-custom-interests"><article><span className="eyebrow">{content.racingEyebrow}</span><h2>{content.racingTitle}<br /><em>{content.racingEmphasis}</em></h2><p>{content.racingText}</p></article><article><span className="eyebrow">{content.esportsEyebrow}</span><h2>{content.esportsTitle}<br /><em>{content.esportsEmphasis}</em></h2><p>{content.esportsText}</p></article></section><section className="about-custom-close"><span className="eyebrow">{content.closeEyebrow}</span><p>{content.closeText}</p><a className="text-link" href="mailto:ruichil1030@gmail.com">{actions.getInTouch} <span>↗</span></a></section></>; }

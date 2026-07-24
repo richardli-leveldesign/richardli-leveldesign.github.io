@@ -1,0 +1,32 @@
+{
+  "number": "06",
+  "title": "Quake 3: The Split",
+  "engine": "id Tech 3",
+  "role": "关卡设计师",
+  "subtitle": "竞技场关卡",
+  "cardDescription": "为 Quake III Arena 制作的竞技场关卡；完整案例分析即将上线。",
+  "coverAlt": "Quake 3: The Split 项目封面",
+  "heroDescription": "一项围绕竞技战斗、移动与玩家流动设计的 Quake III Arena 关卡项目。",
+  "mediaAlt": "Quake 3: The Split 项目封面",
+  "info": [["关卡设计师"], ["id Tech 3 / Quake III Arena"], ["PC"], ["个人项目", "详细内容即将更新"]],
+  "description": {
+    "lead": "Quake 3: The Split 的完整案例分析正在整理中。",
+    "paragraphs": ["本页已为最终的项目简介、设计目标、设计细节、复盘总结和图库内容预留好结构。"]
+  },
+  "goals": [
+    {"title": "设计目标", "body": "项目设计目标将在这里补充。"},
+    {"title": "玩法流动", "body": "玩法与玩家流动的分析将在这里补充。"},
+    {"title": "竞技场体验", "body": "战斗、移动与空间设计意图将在这里补充。"}
+  ],
+  "details": [
+    {"type": "heading", "text": "设计细节"},
+    {"type": "paragraph", "text": "详细的设计过程文档将在这里补充。"}
+  ],
+  "postmortem": [
+    {"title": "做得好的地方", "items": ["复盘内容即将补充。"]},
+    {"title": "遇到的问题", "items": ["复盘内容即将补充。"]},
+    {"title": "我的收获", "items": ["复盘内容即将补充。"]}
+  ],
+  "metaTitle": "Quake 3: The Split — 李瑞驰",
+  "metaDescription": "Quake 3: The Split 的关卡设计作品。"
+}

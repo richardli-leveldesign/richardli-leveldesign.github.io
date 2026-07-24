@@ -1,0 +1,32 @@
+{
+  "number": "06",
+  "title": "Quake 3: The Split",
+  "engine": "id Tech 3",
+  "role": "Level Designer",
+  "subtitle": "Competitive arena level",
+  "cardDescription": "A competitive arena level for Quake III Arena. Full case study coming soon.",
+  "coverAlt": "Quake 3: The Split project cover",
+  "heroDescription": "A Quake III Arena level-design project built around competitive combat, movement, and player flow.",
+  "mediaAlt": "Quake 3: The Split project cover",
+  "info": [["Level Designer"], ["id Tech 3 / Quake III Arena"], ["PC"], ["Individual project", "Details coming soon"]],
+  "description": {
+    "lead": "A full case study for Quake 3: The Split is in development.",
+    "paragraphs": ["This page is ready for the final project description, design goals, design details, postmortem, and gallery materials."]
+  },
+  "goals": [
+    {"title": "Design Goals", "body": "Project goals will be added here."},
+    {"title": "Gameplay Flow", "body": "Gameplay and player-flow breakdowns will be added here."},
+    {"title": "Arena Experience", "body": "Combat, movement, and spatial-design intentions will be added here."}
+  ],
+  "details": [
+    {"type": "heading", "text": "Design Details"},
+    {"type": "paragraph", "text": "Detailed design-process documentation will be added here."}
+  ],
+  "postmortem": [
+    {"title": "What Went Well", "items": ["Postmortem notes coming soon."]},
+    {"title": "What Went Wrong", "items": ["Postmortem notes coming soon."]},
+    {"title": "What I Learned", "items": ["Postmortem notes coming soon."]}
+  ],
+  "metaTitle": "Quake 3: The Split — Ruichi Li",
+  "metaDescription": "Level design work for Quake 3: The Split."
+}
