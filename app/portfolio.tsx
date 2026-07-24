@@ -16,7 +16,7 @@ const detailAssets: Record<string, string[]> = {
   firefly: ["/firefly-details/image1.jpeg", "/firefly-details/image2.jpeg", "/firefly-details/image3.jpeg", "/firefly-details/image4.jpeg", "/firefly-details/image5.jpeg", "/firefly-details/image6.jpeg"],
   blacksite: ["/black-site-details/image1.jpeg", "/black-site-details/image2.jpeg", "/black-site-details/image3.jpeg", "/black-site-details/image4.jpeg", "/black-site-details/image5.jpeg", "/black-site-details/image6.jpeg", "/black-site-details/image7.jpeg"],
   "kill-the-makers": ["/kill-the-makers-detail/image1.jpeg", "/kill-the-makers-detail/image2.jpeg", "/kill-the-makers-detail/image3.jpeg", "/kill-the-makers-detail/image4.jpeg", "/kill-the-makers-detail/image5.jpeg", "/kill-the-makers-detail/image6.jpeg", "/kill-the-makers-detail/image7.jpeg"],
-  "pit-stop": ["/pit-stop-details/image1.jpeg", "/pit-stop-details/image2.jpeg", "/pit-stop-details/image3.jpeg", "/pit-stop-details/image4.jpeg", "/pit-stop-details/image5.gif", "/pit-stop-details/image6.jpeg", "/pit-stop-details/image7.jpeg", "/pit-stop-details/image8.jpeg"]
+  "pit-stop": ["/pit-stop-details/image1.jpeg", "/pit-stop-details/image2.jpeg", "/pit-stop-details/image3.jpeg", "/pit-stop-details/image4.jpeg", "/pit-stop-details/image5.gif", "/pit-stop-details/image7.jpeg", "/pit-stop-details/image6.jpeg", "/pit-stop-details/image8.jpeg"]
 };
 
 const heroAssets: Record<string, string> = {
