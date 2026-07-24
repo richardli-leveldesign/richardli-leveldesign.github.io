@@ -1,32 +1,48 @@
 {
   "number": "06",
   "title": "Quake 3: The Split",
-  "engine": "id Tech 3",
-  "role": "Level Designer",
-  "subtitle": "Competitive arena level",
-  "cardDescription": "A competitive arena level for Quake III Arena. Full case study coming soon.",
+  "engine": "Radiant",
+  "role": "Level Designer / Combat Designer",
+  "subtitle": "10-player Capture the Flag map",
+  "cardDescription": "A competitive 10-player Capture the Flag map for Quake III Arena, built around mirrored bases, vertical combat, and resource control.",
   "coverAlt": "Quake 3: The Split project cover",
-  "heroDescription": "A Quake III Arena level-design project built around competitive combat, movement, and player flow.",
+  "heroDescription": "A competitive Capture the Flag map built around mirrored bases, vertical combat, and meaningful risk-reward decisions.",
   "mediaAlt": "Quake 3: The Split project cover",
-  "info": [["Level Designer"], ["id Tech 3 / Quake III Arena"], ["PC"], ["Individual project", "Details coming soon"]],
+  "info": [["Level Designer", "Combat Designer"], ["Radiant"], ["PC"], ["Finished May 2026"]],
   "description": {
-    "lead": "A full case study for Quake 3: The Split is in development.",
-    "paragraphs": ["This page is ready for the final project description, design goals, design details, postmortem, and gallery materials."]
+    "lead": "The Split is a 10-player Capture the Flag map for Quake 3 Arena. The map features two mirrored team bases connected by multiple combat routes, vertical pathways, catwalks, and a central lobby. Players can use jump pads, launch pads, weapons, armor, and power-ups to choose between safer routes and more aggressive plays. The map combines open sightlines with full-cover areas to support fast movement, varied combat strategies, and constant contest over key objectives.",
+    "paragraphs": []
   },
   "goals": [
-    {"title": "Design Goals", "body": "Project goals will be added here."},
-    {"title": "Gameplay Flow", "body": "Gameplay and player-flow breakdowns will be added here."},
-    {"title": "Arena Experience", "body": "Combat, movement, and spatial-design intentions will be added here."}
+    {"title": "Create Clear and Competitive Capture-the-Flag Flow", "body": "Design mirrored team bases and connected routes to support fair competition, readable objectives, and consistent back-and-forth action."},
+    {"title": "Encourage Route Variety and Vertical Combat", "body": "Use multiple pathways, catwalks, jump pads, launch pads, and height changes to give players different movement and engagement options."},
+    {"title": "Build Meaningful Risk-Reward Decisions", "body": "Place weapons, armor, health, and power-ups in strategically exposed locations so players must decide whether the potential advantage is worth the risk."}
   ],
   "details": [
-    {"type": "heading", "text": "Design Details"},
-    {"type": "paragraph", "text": "Detailed design-process documentation will be added here."}
+    {"type": "heading", "text": "Initial Design"},
+    {"type": "paragraph", "text": "When designing this map, I made a paper map at first. I used Illustrator to create a floor plan. Then I made a 3D view to better verify the map’s vertical relationships. Finally, I gathered some aesthetic references. I organized all of this information into a document for convenient reference later."},
+    {"type": "image", "alt": "The Split initial floor plan, blockout, and visual references"},
+    {"type": "heading", "text": "Create Clear and Competitive Capture-the-Flag Flow"},
+    {"type": "paragraph", "text": "For The Split, I established a mirrored layout to create a fair and readable foundation for Capture the Flag gameplay. Both teams have comparable base structures, route distances, and access to key areas, which helps prevent one side from gaining an unintended positional advantage. I organized the map around clear landmarks such as the bases, Lobby, Triangle, Quad, and Catwalk. This structure allows players to quickly understand their location, identify their objective, and make informed decisions during attacks, retreats, and defensive rotations."},
+    {"type": "image", "alt": "The Split mirrored team base"},
+    {"type": "heading", "text": "Encourage Route Variety and Vertical Combat"},
+    {"type": "paragraph", "text": "I designed multiple interconnected routes and vertical spaces to support different movement and combat styles. Players can travel through main corridors, side rooms, catwalks, and elevated areas, while jump pads and launch pads create faster but more exposed movement options. These routes allow players to choose between direct attacks, flanking maneuvers, defensive repositioning, and vertical engagements. By combining different elevations and traversal options, I aimed to make movement through the map an active strategic decision rather than simply a way to reach the objective."},
+    {"type": "image", "alt": "The Split catwalk and vertical combat route"},
+    {"type": "heading", "text": "Build Meaningful Risk-Reward Decisions"},
+    {"type": "paragraph", "text": "Resource placement was designed to create competition and encourage players to take calculated risks. Weapons, armor, health, and power-ups are positioned in areas that offer valuable advantages but may also expose players to enemy sightlines or contested combat zones. This creates a continuous choice between staying on a safer route or entering a more dangerous area for a stronger reward. My goal was to make resource control an important part of the match flow while ensuring that players could use different strategies to achieve the same objective."},
+    {"type": "heading", "text": "Iteration"},
+    {"type": "paragraph", "text": "During development, I made several adjustments to the map based on playtest feedback. Overall, players responded positively, but two main issues became apparent: the map lacked a high point that could overlook the entire play space, and the team bases were difficult to access."},
+    {"type": "paragraph", "text": "To address the first issue, I added a third floor above the Quad Damage area. This elevated position provides a strong sniping and overwatch location while introducing another important control point for players to contest. As a result, the map gained greater vertical variety and more strategic depth."},
+    {"type": "image", "alt": "The Split third-floor Quad Damage overwatch position"},
+    {"type": "paragraph", "text": "To improve base accessibility, I added a tunnel that gives players an alternative route into each base. This route makes attacking the bases more approachable while also creating opportunities for ambushes, close-quarters combat, and unexpected flanking plays."},
+    {"type": "image", "alt": "The Split tunnel route into a team base"},
+    {"type": "image", "alt": "The Split alternate base approach"}
   ],
   "postmortem": [
-    {"title": "What Went Well", "items": ["Postmortem notes coming soon."]},
-    {"title": "What Went Wrong", "items": ["Postmortem notes coming soon."]},
-    {"title": "What I Learned", "items": ["Postmortem notes coming soon."]}
+    {"title": "What Went Well", "items": ["The mirrored base layout created a clear and fair structure for Capture the Flag gameplay.", "Multiple routes, vertical connections, and strategically placed power-ups supported varied movement and combat strategies."]},
+    {"title": "What Went Wrong", "items": ["The large number of routes and vertical connections could make navigation difficult for new players.", "The symmetrical layout improved fairness but limited environmental variety and unique team strategies."]},
+    {"title": "What I Learned", "items": ["Competitive maps need clear landmarks and readable routes so players can quickly understand the space.", "Item placement should be evaluated together with sightlines, traversal routes, and combat intensity."]}
   ],
   "metaTitle": "Quake 3: The Split — Ruichi Li",
-  "metaDescription": "Level design work for Quake 3: The Split."
+  "metaDescription": "Level and combat design for Quake 3: The Split."
 }

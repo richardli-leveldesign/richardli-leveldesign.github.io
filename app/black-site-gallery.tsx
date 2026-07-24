@@ -148,12 +148,15 @@ const pitStopGalleryItems: GalleryItem[] = [
   })),
 ];
 
-const quakeSplitGalleryItems: GalleryItem[] = [{
-  type: "image" as const,
-  src: "/quake-3-the-split-cover.png",
-  thumbnail: "/quake-3-the-split-cover.png",
-  alt: "Quake 3: The Split project cover",
-}];
+const quakeSplitGalleryItems: GalleryItem[] = Array.from({ length: 15 }, (_, index) => {
+  const imageNumber = index + 7;
+  return {
+    type: "image" as const,
+    src: `/quake-3-details/image${imageNumber}.jpeg`,
+    thumbnail: `/quake-3-details/image${imageNumber}.jpeg`,
+    alt: `Quake 3: The Split gallery image ${index + 1}`,
+  };
+});
 
 export function BlackSiteGallery({ items = blackSiteGalleryItems, kind = "blacksite" }: { items?: GalleryItem[]; kind?: "blacksite" | "killTheMakers" | "hamsterballin" | "firefly" | "pitStop" | "quakeSplit" }) {
   const { dictionary } = useLanguage();
