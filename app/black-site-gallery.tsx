@@ -133,12 +133,20 @@ const fireflyGalleryItems: GalleryItem[] = [
 
 const pitStopGalleryImageNames = Array.from({ length: 15 }, (_, index) => `image${index + 9}.jpeg`);
 
-const pitStopGalleryItems: GalleryItem[] = pitStopGalleryImageNames.map((name, index) => ({
-  type: "image" as const,
-  src: `/pit-stop-gallery/${name}`,
-  thumbnail: `/pit-stop-gallery/${name}`,
-  alt: `Half-Life 2: Pit Stop gallery image ${index + 1}`,
-}));
+const pitStopGalleryItems: GalleryItem[] = [
+  {
+    type: "video" as const,
+    src: "https://www.youtube.com/embed/QWvhKCl7WyE?enablejsapi=1&origin=https%3A%2F%2Frichardli-leveldesign.github.io&rel=0&vq=hd720",
+    thumbnail: "https://img.youtube.com/vi/QWvhKCl7WyE/hqdefault.jpg",
+    alt: "Half-Life 2: Pit Stop video",
+  },
+  ...pitStopGalleryImageNames.map((name, index) => ({
+    type: "image" as const,
+    src: `/pit-stop-gallery/${name}`,
+    thumbnail: `/pit-stop-gallery/${name}`,
+    alt: `Half-Life 2: Pit Stop gallery image ${index + 1}`,
+  })),
+];
 
 export function BlackSiteGallery({ items = blackSiteGalleryItems, kind = "blacksite" }: { items?: GalleryItem[]; kind?: "blacksite" | "killTheMakers" | "hamsterballin" | "firefly" | "pitStop" }) {
   const { dictionary } = useLanguage();
